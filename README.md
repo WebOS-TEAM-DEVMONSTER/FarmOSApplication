@@ -1,267 +1,126 @@
-This project was bootstrapped with [@enact/cli](https://github.com/enactjs/cli).
+# FarmOSApp
+Farm OS 어플리케이션입니다.
 
-Below you will find some information on how to perform common tasks.
-You can find the most recent version of this guide [here](https://github.com/enactjs/templates/blob/master/packages/webostv/template/README.md).
-Additional documentation on @enact/cli can be found [here](https://github.com/enactjs/cli/blob/master/docs/index.md).
 
-## Folder Structure
+# 사용법
 
-After creation, your project should look like this:
 
-```
-my-app/
-  README.md
-  .gitignore
-  node_modules/
-  package.json
-  src/
-    App/
-      App.js
-      App.less
-      package.json
-    components/
-    views/
-      MainPanel.js
-    index.js
-    reportWebVitals.js
-  resources/
-  webos-meta/
-```
 
-For the project to build, **these files must exist with exact filenames**:
+## 처음 시작할 때
+1. vscode에서 webos studio 개발 환경을 갖춘다.
+2. webos studio에서 워크스페이스 폴더를 지정한다.
+3. 워크스페이스 폴더에서 git clone을 통해 해당 프로젝트를 다운로드 한다.
+4. 이후, 해당 프로젝트에서 개발 작업을 수행하면 된다.
 
-* `package.json` is the core package manifest for the project
-* `src/index.js` is the JavaScript entry point.
 
-You can delete or rename the other files.
+## 프로세스
 
-You can update the `license` entry in `package.json` to match the license of your choice. For more
-information on licenses, please see the [npm documentation](https://docs.npmjs.com/files/package.json#license).
+소정씨는 A라는 파트를, 동현씨는 B라는 파트를 각자 이번주까지 맡아서 수행해야 한다.
+깃허브는 프로젝트와 프로젝트 버젼 자체를 관리하는 툴이므로, 개인 저장소 처럼 쓰기에는 적절하지 않다.
+그래서 개인별로 브랜치를 생성하였다. 소정 -> sojung, 동현 -> donghyeon
+![image](https://github.com/user-attachments/assets/45e3c060-cb1a-40d2-9b24-3eeab85184b5)
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm run serve`
+## 업로드 (push)
+소정씨는 A라는 파트를, 동현씨는 B라는 파트를 각자 구현하였고, 이제 업로드 해야한다.
 
-Builds and serves the app in the development mode.<br>
-Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+깃허브의 구조는 원격 저장소(웹으로 볼 수 있는것)와 로컬 저장소(내 컴퓨터에만 저장되는것)으로 나뉜다.
+우리가 업로드(서로 업로드 해야 하니깐 원격 저장소에 업로드)하기 위해서는 다음과 같은 과정이 필요하다.
 
-The page will reload if you make edits.<br>
+1. 로컬 저장소를 생성한다  % git init
 
-### `npm run pack` and `npm run pack-p`
+2. 프로젝트 폴더 내에 있는 모든 변경된 파일 및 폴더를 선택한다  % git add .
 
-Builds the project in the working directory. Specifically, `pack` builds in development mode with code un-minified and with debug code included, whereas `pack-p` builds in production mode, with everything minified and optimized for performance. Be sure to avoid shipping or performance testing on development mode builds.
+3. 2.에서 선택된 폴더 파일을 커밋한다  % git commit -m "**first commit**"  
 
-### `npm run watch`
+// 쌍따움표는 입력해야하고 first commit 대신 내가 구현한 내용에 대해 간략하게 작성한다. 예시: git commit -m "첫번째 커밋"
 
-Builds the project in development mode and keeps watch over the project directory. Whenever files are changed, added, or deleted, the project will automatically get rebuilt using an active shared cache to speed up the process. This is similar to the `serve` task, but without the http server.
+4. **(처음 업로드하는 경우에만)** 로컬 저장소와 원격 저장소를 연결한다.  % git remote add origin **주소**
 
-### `npm run clean`
+5. **(처음 업로드 하는 경우에만 사용해야 함)** 깃에다 push 한다.  % git push origin -u **브랜치명(sojung or donghyeon)** 
 
-Deletes previous build fragments from ./dist.
+6. (처음 업로드 하는것이 아닌 경우) 깃에다 push 한다.  % git push origin **브랜치명(sojung or donghyeon)** 
 
-### `npm run lint`
+-u 는 로컬 브랜치와 원격 브랜치를 연결한다는 의미다. 연결을 1번만 하면 계속 연결 상태가 유지되며, -u를 2번 이상 사용할 경우, 오히려 추적이 복잡해질 수 있다.
 
-Runs the Enact configuration of Eslint on the project for syntax analysis.
 
-### `npm run test` and `npm run test-watch`
+이러면 방금 push한 개인 브랜치가 최신 버젼이 될 것이다. 그럼 develop 브랜치에서도 개인 브랜치의 업데이트를 적용시켜야 한다.
 
-These tasks will execute all valid tests (files that end in `-specs.js`) that are within the project directory. The `test` is a standard single execution pass, while `test-watch` will set up a watcher to re-execute tests when files change.
+이 때 깃허브 프로젝트 페이지나 vscode의 확장 프로그램 중 하나를 이용하여, Pull Request를 실행한다.
 
-## Enact Build Options
+## 풀 리퀘스트 (pull request)
 
-The @enact/cli tool will check the project's `package.json` looking for an optional `enact` object for a few customization options:
 
-* `template` _[string]_ - Filepath to an alternate HTML template to use with the [Webpack html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin).
-* `isomorphic` _[string]_ - Alternate filepath to a custom isomorphic-compatible entry point. Not needed if main entry point is already isomorphic-compatible.
-* `title` _[string]_ - Title text that should be put within the HTML's `<title></title>` tags. Note: if this is a webOS-project, the title will, by default, be auto-detected from the **appinfo.json** content.
-* `theme` _[object]_ - A simplified string name to extrapolate `fontGenerator`, `ri`, and `screenTypes` preset values from. For example, `"sandstone"`.
-* `fontGenerator` _[string]_ - Filepath to a CommonJS fontGenerator module which will build locale-specific font CSS to inject into the HTML. By default, will use any preset for a specified theme or fallback to sandstone.
-* `ri` _[object]_ - Resolution independence options to be forwarded to the [postcss-resolution-independence](https://github.com/enactjs/postcss-resolution-independence). By default, will use any preset for a specified theme or fallback to sandstone.
-  * `baseSize` _[number]_ - The root font-size to use when converting the value of the base unit to a resolution-independent unit. For example, when `baseSize` is set to 24, 48px in the LESS file will be converted to 2rem.
-* `screenTypes` _[array|string]_ - Array of 1 or more screentype definitions to be used with prerender HTML initialization. Can alternatively reference a json filepath to read for screentype definitions.  By default, will use any preset for a specified theme or fallback to sandstone.
-* `nodeBuiltins` _[object]_ - Configuration settings for polyfilling NodeJS built-ins. See `node` [webpack option](https://webpack.js.org/configuration/node/).
-* `resolveFallback` _[object]_ - Configuration settings for redirecting module requests when normal resolving fails. See `resolve.fallback` [webpack option](https://webpack.js.org/configuration/resolve/#resolvefallback).
-* `deep` _[string|array]_ - 1 or more JavaScript conditions that, when met, indicate deeplinking and any prerender should be discarded.
-* `target` _[string|array]_ - A build-type generic preset string (see `target` [webpack option](https://webpack.js.org/configuration/target/)) or alternatively a specific [browserslist array](https://github.com/browserslist/browserslist) of desired targets.
-* `proxy` _[string]_ - Proxy target during project `serve` to be used within the [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware).
+깃허브 프로젝트 페이지가 접근성이 좋으므로, 이를 기준으로 설명하겠다.
+![image](https://github.com/user-attachments/assets/6ed5b131-371c-4ec6-b334-1336940d7003)
 
-For example:
-```js
-{
-  ...
-  "enact": {
-    "theme": "sandstone",
-    "resolveFallback": {
-      fs: false,
-      net: false,
-      tls: false
-    }
-  }
-  ...
-}
-```
+1. 위 화면에서 Pull Requests를 클릭한다.
+2. New pull request를 클릭한다.
+3. base: develop 브랜치, compare: 내가 방금 push한 브랜치로 설정하고, create pull request 버튼을 클릭한다.
+4. 내용을 입력하고 pull requset를 올린다.
+5. (어려우면 안해도 됨) 서로 작성한 코드를 확인하여 리뷰를 진행한다.(평가, 궁금한 점 제시 등등)
+6. merge를 누른다.
 
-## Displaying Lint Output in the Editor
+## git pull
+이것은 중요한 작업이다. 이 작업을 생략할 경우, 업로드(push)가 제한될 수 있다.
 
-Some editors, including Sublime Text, Atom, and Visual Studio Code, provide plugins for ESLint.
+소정씨는 A라는 파트를, 동현씨는 B라는 파트를 각자 구현하였고, push와 pull request를 통해 merge과정을 수행했다.
+이렇게되면, develop 브랜치는 sojung 브랜치와 donghyeon 브랜치가 합쳐진 궁극의 브랜치가 되어있을 것이다.
 
-They are not required for linting. You should see the linter output right in your terminal as well as the browser console. However, if you prefer the lint results to appear right in your editor, there are some extra steps you can do.
+이제 소정씨는 C라는 파트를, 동현씨는 D라는 파트를 구현할 계획을 세웠다.
 
-You would need to install an ESLint plugin for your editor first.
+이렇게 되면 sojung 브랜치는 A 파트만, donghyeon 브랜치는 B 파트만, develop 브랜치는 A, B 파트가 있는 상태이다.
 
-Ever since ESLint 6, global installs of ESLint configs are no longer supported.
-To work around this new limitation, while still supporting in-editor linting, we've created a new [eslint-config-enact-proxy](https://github.com/enactjs/eslint-config-enact-proxy) package.
-The [eslint-config-enact-proxy](https://github.com/enactjs/eslint-config-enact-proxy) acts like a small proxy config, redirecting ESLint to use a globally-installed Enact ESLint config.
-`eslint-config-enact-proxy` needs to be installed locally on a project to enable in-editor linting:
+여기서 C, D 파트를 개발하기 전에, sojung 브랜치와 donghyeon 브랜치도 똑같이 A,B 파트를 가지도록 develop 브랜치와 동기화를 해야한다.
 
-```sh
-npm install --save-dev eslint-config-enact-proxy
-```
+이 과정을 수행하지 않으면, 다음 업로드에서 develop 버젼이 맞지 않아 오류가 발생할 수 있다.
 
-Also, you need to modify `eslintConfig` property in `package.json`:
+git pull을 하기위해 다음과 같은 과정을 거친다.
+서로 개인 브랜치에서 작업한 상태이기에, 현재 브랜치는 개인 브랜치(sojung or donghyeon)로 되어있을 것이다.
+(%git branch 명령어를 통해 확인할 수 있다.)
 
-```json
-  "eslintConfig": {
-    "extends": "enact-proxy"
-  },
-```
->**NOTE**: For strict mode, use `"extends": "enact-proxy/strict"`.
+1. develop 브랜치로 이동한다.  % git checkout develop
 
-In order for in-editor linting to work with our updated ESLint config, you'll need to upgrade to ESLint 7 or later. This can be installed globally by running:
+2. git pull을 진행한다.  % git pull origin develop
 
-```sh
-npm install -g eslint
-```
+3. 다시 개인 브랜치로 이동한다.  % git checkout -
 
-Then, you will need to uninstall any previous globally-installed Enact linting package (everything but eslint itself):
+4. merge를 실행한다.  % git merge develop
 
-```sh
-npm uninstall -g eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-babel @babel/eslint-parser eslint-plugin-jest eslint-plugin-enact eslint-config-enact
-```
 
-## Installing a Dependency
+이제 각자 C, D 파트 개발을 진행하면 된다.
 
-The generated project includes Enact (and all its libraries). It also includes React and ReactDOM.  For test writing, both Jest and @testing-library/react are as development dependencies. You may install other dependencies with `npm`:
 
-```sh
-npm install --save <package-name>
-```
 
-## Importing a Component
 
-This project setup supports ES6 modules thanks to Babel.
-While you can still use `require()` and `module.exports`, we encourage you to use [`import` and `export`](http://exploringjs.com/es6/ch_modules.html) instead.
 
-For example:
+## git pull (과정 중간에 업데이트 해야 할 경우)
 
-### `Button.js`
+소정씨는 A라는 파트를, 동현씨는 B라는 파트를 각자 구현하는 중에 A 파트에서 B 파트의 일부가 필요하다면, 구현을 못할 것이다. (이러한 경우가 없도록 계획하는것이 좋다.)
 
-```js
-import kind from '@enact/core/kind';
+위와 같은 경우일때만 아래를 내용을 읽어보자
 
-const Button = kind({
-  render() {
-    // ...
-  }
-});
+현재 개발중인 A 파트를 A', 현재 개발중인 B 파트를 B'라고 하겠다.
 
-export default Button; // Don’t forget to use export default!
-```
+만약 이러한 경우가 생긴다면 develop 브랜치에 B' 만 업데이트시키고, 그것을 A에 받아와서 쓸 수 있다.
+그래서, 위와 같은 과정으로 push와 pull request를 성공했다면, 소정씨는 는 임시로 B'를 받아와야한다.
 
-### `DangerButton.js`
+이때 소정씨는
 
+1. 임시 저장소를 생성한다.  % git stash
 
-```js
-import kind from '@enact/core/kind';
-import Button from './Button'; // Import a component from another file
+2. develop 브랜치로 이동한다.  % git checkout develop
 
-const DangerButton = kind({
-  render(props) {
-    return <Button {...props} color="red" />;
-  }
-});
+3. git pull을 진행한다.  % git pull origin develop
 
-export default DangerButton;
-```
+4. 다시 개인 브랜치로 이동한다.  % git checkout -
 
-Be aware of the [difference between default and named exports](http://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281). It is a common source of mistakes.
+5. merge를 실행한다.  % git merge develop
 
-We suggest that you stick to using default imports and exports when a module only exports a single thing (for example, a component). That’s what you get when you use `export default Button` and `import Button from './Button'`.
+6. 임시 저장소를 삭제한다.  % git stash pop
 
-Named exports are useful for utility modules that export several functions. A module may have at most one default export and as many named exports as you like.
 
-Learn more about ES6 modules:
-
-* [When to use the curly braces?](http://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281)
-* [Exploring ES6: Modules](http://exploringjs.com/es6/ch_modules.html)
-* [Understanding ES6: Modules](https://leanpub.com/understandinges6/read#leanpub-auto-encapsulating-code-with-modules)
-
-## Adding a LESS or CSS Stylesheet
-
-This project setup uses [Webpack](https://webpack.github.io/) for handling all assets. Webpack offers a custom way of “extending” the concept of `import` beyond JavaScript. To express that a JavaScript file depends on a LESS/CSS file, you need to **import the CSS from the JavaScript file**:
-
-### `Button.less`
-
-```css
-.button {
-  padding: 20px;
-}
-```
-
-### `Button.js`
-
-```js
-import kind from '@enact/core/kind';
-import styles './Button.css'; // Tell Webpack that Button.js uses these styles
-
-const Button = kind({
-  render() {
-    // You can use them as regular CSS styles
-    return <div className={styles['button']} />;
-  }
-}
-```
-
-Upon importing a css/less files, the resulting object will be a mapping of class names from that document. This allows correct access to the class name string regardless how the build process mangles it up.
-
-In development, expressing dependencies this way allows your styles to be reloaded on the fly as you edit them. In production, all CSS files will be concatenated into a single minified `.css` file in the build output.
-
-Additionally, this system setup supports [CSS module spec](https://github.com/css-modules/css-modules) with allows for compositional CSS classes and inheritance of styles.
-
-## Adding Images and Custom Fonts
-
-With Webpack, using static assets like images and fonts works similarly to CSS.
-
-You can **`import` an image right in a JavaScript module**. This tells Webpack to include that image in the bundle. Unlike CSS imports, importing an image or a font gives you a string value. This value is the final image path you can reference in your code.
-
-Here is an example:
-
-```js
-import kind from '@enact/core/kind';
-import logo from './logo.png'; // Tell Webpack this JS file uses this image
-
-console.log(logo); // /logo.84287d09.png
-
-const Header = kind({
-  render: function() {
-    // Import result is the URL of your image
-    return <img src={logo} alt="Logo" />;
-  }
-});
-
-export default Header;
-```
-
-This is currently required for local images. This ensures that when the project is built, webpack will correctly move the images into the build folder, and provide us with correct paths.
-
-This works in LESS/CSS too:
-
-```css
-.logo {
-  background-image: url(./logo.png);
-}
-```
-
-Webpack finds all relative module references in CSS (they start with `./`) and replaces them with the final paths from the compiled bundle. If you make a typo or accidentally delete an important file, you will see a compilation error, just like when you import a non-existent JavaScript module. The final filenames in the compiled bundle are generated by Webpack from content hashes.
+1.에서 임시 저장소는 A' 파트를 저장한다.
+2. ~ 5. 과정에서 A' 파트가 B' 파트로 바뀐다.
+6.에서 임시 저장소가 pop될 때, B' 파트에 A' 파트가 더해진다.
