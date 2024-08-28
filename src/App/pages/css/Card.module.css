@@ -1,0 +1,40 @@
+.item {
+  width: 29%;
+   margin: 20px 0 0 0;  
+  padding: 10px;
+  background-color:#F9FAEF;
+  box-sizing: border-box; 
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  margin:5px;
+  padding: 0 0 0 8px;
+}
+.profile {
+  border:1px solid;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: tomato;
+} 
+.name {
+  width: calc(100% -36px);
+  padding-left: 20px;
+  margin: 8px 0 0 0;
+} 
+.image{
+  max-width: 100%;
+}
+.info {
+  dislplay: flex;
+}
+.product_name {
+  margin: 5px;
+}
+.product_price {
+  margin:5px;
+}
+.product_detail{
+  margin:5px 5px 40px 5px;
+}
