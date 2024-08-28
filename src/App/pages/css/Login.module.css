@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Nanum+Pen+Script&display=swap');
+
+/* 모든 요소에 기본 마진과 패딩을 제거하고, 박스 모델을 border-box로 설정 */
+* {
+	margin : 0;
+	padding : 0;
+	box-sizing: border-box;
+}
+
+
+/* 로그인 폼의 전체적인 레이아웃과 위치 설정 */
+.login{
+	width: 400px;
+	height: 330px;
+	position: absolute;
+	top: 50%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* 로그인 폼의 제목 스타일 */
+.login >fieldset> h1 {
+	font-family: "Nanum Brush Script", cursive;
+	font-weight: 500;
+  font-style: normal;
+	font-size:40px;
+}
+/* 로그인 폼의 필드셋 스타일 */
+.login > fieldset {
+	width: 400px;
+	height: 330px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+}
+
+.login > fieldset > h1 {
+	text-align: center;
+	margin: 20px 0px;
+}
+
+/* 입력 필드 리스트 스타일 */
+.login > fieldset > ul {
+	list-style-type: none;
+}
+/* 리스트 아이템 스타일 */
+.login > fieldset > ul > li {
+	text-align: center;
+	margin-bottom: 20px;
+}
+/* 아이디 입력 필드 스타일 */
+.id {
+	width: 300px;
+	height:25px;
+	padding:5px;
+}
+/* 비밀번호 입력 필드 스타일 */
+.password{
+	width: 300px;
+	height:25px;
+	padding:5px;
+	margin-bottom: 20px;
+}
+/* 로그인 버튼과 링크 사이의 간격 추가 */
+.login > fieldset > div {
+	text-align: center;
+	margin-bottom: 10px; /* 로그인 버튼과 아래 링크 사이의 간격 추가 */
+}
+/* 로그인 버튼 스타일 */
+.loginButton {
+	display :inline-block;
+	width: 310px;
+	height:25px;
+	border-radius: 10px;
+	background-color:#DBE7C8;
+	margin-bottom: 5px;
+}
+/* 마지막 ul 내의 li에 대한 마진 설정 */
+.login > fieldset >ul:last-of-type > li{
+	maring:20px;
+}
+/* 링크 스타일 */
+.login > fieldset > ul > li > a {
+	font-size: 15px;
+	text-decoration: none;
+	color : black;
+}
+/* 작은 텍스트 스타일 */
+.login > fieldset > ul > li > span {
+	font-size:10px;
+}
+
+
+
+

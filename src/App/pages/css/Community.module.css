@@ -1,0 +1,10 @@
+body {
+  background-color: white;
+}
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  align-content: space-around;
+  margin: 0px 0px 0px 200px;
+}
