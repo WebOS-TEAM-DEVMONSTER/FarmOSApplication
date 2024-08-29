@@ -1,23 +1,26 @@
 .detail_container {
-  margin: 10px 0 0 100px; 
-  width: 1000px;
+  margin: 10px 0 0 500px; 
+  width: 2000px;
   height: 100vh;
+
 }
 .detail_wrapper {
-  width: 1000px;
-  height: 480px;
+  width: 2000px;
+  height: 1200px;
   display:grid;
-  grid-template-columns:repeat(4,250px);
-  grid-template-rows: repeat(4,120px);
+  grid-template-columns:repeat(4,500px);
+  grid-template-rows: repeat(4,300px);
+  
 }
 .detail_header {
   grid-column: 1/5;
   grid-row-start:1;
+ 
 }
 .profile {
   border:1px solid;
-  width: 50px;
-  height: 50px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background-color: tomato;
   margin:50px 0 0 0 ;
@@ -25,21 +28,23 @@
 }
 .detail_header > h1 {
   float:left;
-  margin: 55px 0 0 40px;
+  font-size:100px;
+  margin: 80px 0 0 40px;
 }
-.detail_content {
-  background-color:#E2E3D8;
-  grid-column:1/5;
-  grid-row:2/5;
-  display:grid;
-  grid-template-columns:repeat(4,250px);
-  grid-template-rows: repeat(3,120px);
-}
+// .detail_content {
+//   background-color:#E2E3D8;
+//   grid-column:1/5;
+//   grid-row:2/5;
+//   display:grid;
+//   grid-template-columns:repeat(4,250px);
+//   grid-template-rows: repeat(3,120px);
+// }
 .detail_img {
   grid-column: 1/3;
-  grid-row:1/4;
+  grid-row:2/5;
   overflow: hidden;
   position: relative;
+  background-color:#E2E3D8;
 }
 .detail_img > img {
   position: absolute;
@@ -51,45 +56,50 @@
 }
 .detail_title {
   grid-column-start: 3;
-  grid-row-start:1;
+  grid-row-start:2;
+  background-color:#E2E3D8;
 }
 .detail_title > h1 {
   margin: 20px 0 0 0;
+  font-size:100px;
 }
 .detail_price {
   grid-column-start: 4;
-  grid-row-start:1;
+  grid-row-start:2;
+  background-color:#E2E3D8;
 }
 .detail_price > p {
-  font-size: 35px;
+  font-size: 100px;
   margin: 16px 20px 0 0;
   color:#344E17;
   float: right;
 }
 .detail_info {
   grid-column:3/5;
-  grid-row:2/4;
+  grid-row:3/5;
+  background-color:#E2E3D8;
 }
 .detail_info > p {
-  font-size: 20px;
+  font-size: 50px;
 }
 .inputBox{
   position: relative;
 }
 .detail_comment{
-  padding:10px 0 0 5px;
+  padding:25px 0 0 5px;
   margin:50px 0 0 0;
-  width: 1000px;
-  height: 60px;
-  font-size:20px;
+  width: 2000px;
+  height: 150px;
+  font-size:60px;
+  border: solid #344E17;
   background-color:#E2E3D8;
     
 }
 .empytSpan {
   position: absolute;
-  top:55px;
+  top:45px;
   left:5px;
-  font-size:30px;
+  font-size:100px;
   color: gray;
   transition:1s;
 } 
@@ -98,7 +108,7 @@
   position: absolute;
   top:50px;
   left:5px;
-  font-size:13px;
+  font-size:35px;
   color: gray;
   transition-duration: 1s;
 }

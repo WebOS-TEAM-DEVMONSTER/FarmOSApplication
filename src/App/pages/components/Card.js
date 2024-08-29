@@ -1,4 +1,4 @@
-import CardCss from "../css/Card.module.css";
+import CardCss from "../css/Card.module.less";
 import data from "../../../data.js"
 function Card(props) {
   return(
@@ -9,9 +9,12 @@ function Card(props) {
       </div>  
       <img className={CardCss.image} src={process.env.PUBLIC_URL +'/vegetable.jpg'} />
       <div className={CardCss.info}>
-        <h1 className={CardCss.product_name}>{props.product.title}</h1>
-        <p className={CardCss.product_price}>{props.product.price}</p>
-        <p className={CardCss.product_detail}>{props.product.content}</p>
+        <ul>
+          <li><h1 className={CardCss.product_name}>{props.product.title}</h1></li>
+          <li><p className={CardCss.product_price}>{props.product.price}</p></li>
+          <li><p className={CardCss.product_detail}>{props.product.content}</p></li>
+        </ul>
+        
       </div>
     </div>
   )

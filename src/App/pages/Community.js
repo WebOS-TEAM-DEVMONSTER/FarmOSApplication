@@ -1,5 +1,5 @@
 import Nav from './components/CommunityNav';
-import communityCss from './css/Community.module.css';
+import communityCss from './css/Community.module.less';
 import Card from './components/Card';
 import data from "../../data.js";
 import { useState } from "react";
