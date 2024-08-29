@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 
 import './index.css';
+import Community from './App/pages/Community';
 
 const appElement = (<App />);
 

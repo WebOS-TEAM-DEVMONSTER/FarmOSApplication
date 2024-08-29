@@ -7,11 +7,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 500px;
   height: 100vh;
   background-color: #F9FAEF;
   padding: 40px 0 0 0px;
-  
 }
 .nav_wrapper{
   width:100%;
@@ -23,9 +22,11 @@
 .nav_wrapper > li {
   width:100%;
   padding:5px;
-  margin: 15px 5px;
-
+  margin: 50px 5px;
 } 
+.nav_wrapper > li:first-child {
+  margin-top: 200px;
+}
 .nav_wrapper > li:hover{
   background-color:#D4E1D1;
   transition-duration: 0.4s;
@@ -33,10 +34,12 @@
 
 .active{
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: 60px;
+  font-weight: bold;
   color: black;
   padding:5px;
   text-decoration: none;
+  
 }
 
 .active:active {

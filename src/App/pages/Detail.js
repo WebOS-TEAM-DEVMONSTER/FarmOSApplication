@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import Nav from './components/CommunityNav';
-import DetailCss from './css/Detail.module.css';
+import DetailCss from './css/Detail.module.less';
 import { useState } from "react";
 
 function Detail(props) {
@@ -20,7 +20,7 @@ function Detail(props) {
               <div className={DetailCss.profile} />
               <h1>{props.products[id].name}</h1>
             </div>
-            <div className ={DetailCss.detail_content}>
+           
               <div className={DetailCss.detail_img}>
                 <img src={process.env.PUBLIC_URL +'/vegetable.jpg'}></img>
               </div>
@@ -33,7 +33,7 @@ function Detail(props) {
               <div className={DetailCss.detail_info}>
                 <p>{props.products[id].content}</p>
               </div>
-            </div>
+            
           </div>
           <form>
             <div className={DetailCss.inputBox}>

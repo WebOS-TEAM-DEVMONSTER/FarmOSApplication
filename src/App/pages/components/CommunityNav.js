@@ -1,4 +1,4 @@
-import navStyle from "../css/Nav.module.css";
+import navStyle from "../css/Nav.module.less";
 import { Link ,NavLink } from 'react-router-dom';
 
 

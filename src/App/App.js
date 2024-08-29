@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Create from './pages/Create';
+import React from 'react';
 
 function App() {
     const [products, setProducts] = useState(data);

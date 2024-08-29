@@ -1,4 +1,5 @@
-import styles from "./css/Login.module.css";
+import styles from "./css/Login.module.less";
+import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -24,7 +25,7 @@ function Login() {
   const containerStyle = {
     height: '100vh',
     backgroundColor: 	'#F5F6F3', 
-    margin: 0
+    margin: "0"
   };
 
   
@@ -33,10 +34,10 @@ function Login() {
 			<form className={styles.login}>
 				<fieldset>
           <h1>팜OS</h1>
-					<ul>
-						<li><input type="text" value = {id} className ={styles.id} onChange={handleIdChange} placeholder='전화번호 (-없이 작성하세요)'/></li>
-						<li><input type="password" value = {passWord} className={styles.password} onChange={handlePasswordChange} placeholder='비밀번호'/></li>
-					</ul>
+					
+						<input type="text" className={styles.id} value={id} onChange={handleIdChange} placeholder='아이디'/>
+						<input type="password" value = {passWord} className={styles.password} onChange={handlePasswordChange} placeholder='비밀번호'/>
+					
           <div>
 					  <button className={styles.loginButton}>로그인</button>
           </div>
