@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Create from './pages/Create';
+import Update from './pages/Update'
 import React from 'react';
 
 function App() {
@@ -22,6 +23,19 @@ function App() {
         setNextId(nextId + 1);
     };
 
+    const onUpdate = (_title, _price, _content, _id) => {
+        const newProducts = [...products];
+        const updatedProduct = {id:_id, name: products[_id].name , title:_title, price:_price, content:_content}
+        for(let i = 0; i < newProducts.length;i++){
+            if(newProducts[i].id === _id){
+                newProducts[i] = updatedProduct;
+                break;
+            }
+        }
+        setProducts(newProducts);
+        navigate(`/detail/${_id}`);
+    }
+
     return (
         <div>
             <Routes>
@@ -31,6 +45,7 @@ function App() {
                 <Route path="/community" element={<Community products={products} />} />
                 <Route path="/detail/:id" element={<Detail products={products} />} />
                 <Route path="/create" element={<Create onCreate={handleCreate} />} />
+                <Route path="/update/:id" element={<Update onUpdate={onUpdate} products = {products}/>} />
             </Routes>
         </div>
     );

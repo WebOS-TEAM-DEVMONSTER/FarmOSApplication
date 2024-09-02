@@ -1,6 +1,6 @@
 import Nav from "./components/CommunityNav";
 import "react";
-import createCss from "./css/Create.module.css";
+import createCss from "./css/Create.module.less";
 import "react-router-dom";
 
 function Create (props) {
@@ -8,7 +8,7 @@ function Create (props) {
   return(
     <>
       <Nav />
-      <form style={{display :"flex", justifyContent : "center" , margin:"0 0 0 200px",flexWrap:"wrap" }}
+      <form style={{display :"flex", justifyContent : "center" } }
         onSubmit={event => {
           const title = event.target.title.value;
           const price = event.target.price.value;
@@ -26,8 +26,6 @@ function Create (props) {
             <button>게시글 등록</button>
           </section>
         </div>
-
-        
       </form>
     </>
   )

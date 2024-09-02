@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate,Link } from "react-router-dom";
 import Nav from './components/CommunityNav';
 import DetailCss from './css/Detail.module.less';
 import { useState } from "react";
@@ -10,15 +10,17 @@ function Detail(props) {
     setComment(e.target.value);
     console.log(comment)
   }
+  let navigate = useNavigate();
   return(
     <>
       <Nav />
-      <div style={{ display: "flex", justifyContent: "center",}}>
+      <div style={{ display: "flex", justifyContent: "center"}}>
         <div className={DetailCss.detail_container}>
           <div className={DetailCss.detail_wrapper}>
             <div className={DetailCss.detail_header}>
               <div className={DetailCss.profile} />
               <h1>{props.products[id].name}</h1>
+             <button onClick={()=>navigate(`/update/${id}`)}>수정하기</button>
             </div>
            
               <div className={DetailCss.detail_img}>
