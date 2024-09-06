@@ -1,5 +1,5 @@
 import CardCss from "../css/Card.module.less";
-import data from "../../../data.js"
+
 function Card(props) {
   return(
     <div className={CardCss.item} onClick = {() => {props.handleClick();}}>

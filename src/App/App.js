@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Create from './pages/Create';
 import Update from './pages/Update'
+import UserProfile from './pages/UserProfile';
 import React from 'react';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/detail/:id" element={<Detail products={products} />} />
                 <Route path="/create" element={<Create onCreate={handleCreate} />} />
                 <Route path="/update/:id" element={<Update onUpdate={onUpdate} products = {products}/>} />
+                <Route path="/userDetail" element={<UserProfile products={products}/>} />
             </Routes>
         </div>
     );
