@@ -18,6 +18,7 @@ function Community(props) {
             props.products.map((product, index) =>{
             return(
               <Card product = {product} index = {index}
+              userDetailPage ={() => navigate(`/userDetail/${product.id}`)}
               handleClick ={() => navigate(`/detail/${product.id}`)}
               /> 
             )})
