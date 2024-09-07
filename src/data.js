@@ -5,55 +5,69 @@ const data = [
     title : "고구마",
     price : 120000,
     content : "유기농입니다. 맛있어요!",
-   
+    score: 17,
+    phone:"010-0000-0000",
+    farm:"고구마 스마트팜",
   },
-
   {
     id : 1,
-    name : '김동현',
+    name : '박ㅇㅇ',
     title : "배추",
     price : 110000,
     content : "배추가 맛있어요. 최고입니다.",
+    score: 17,
+    phone:"010-0000-0000",
+    farm:"고구마 스마트팜",
   },
-
   {
     id : 2,
-    name : '김동현',
+    name : '오ㅇㅇ',
     title : "김치",
     price : 110000,
     content : "김치가 최고입니다.",
+    score: 13,
+    phone:"010-0000-0000",
+    farm:"고구마 스마트팜",
   },
-
   {
     id : 3,
-    name : '김동현',
+    name : '정ㅇㅇ',
     title : "상추",
     price : 110000,
     content : "상추가 아주 최고입니다. 굳이예요 굳!",
+    score: 17,
+    phone:"010-0000-0000",
+    farm:"고구마 스마트팜",
   },
-
   {
     id : 4,
-    name : '김동현',
+    name : '이ㅇㅇ',
     title : "감자",
     price : 110000,
     content : "배추가 맛있어요. 최고입니다.",
+    score: 6,
+    phone:"010-0000-0000",
+    farm:"고구마 스마트팜",
   },
-
   {
     id : 5,
-    name : '김동현',
+    name : '송ㅇㅇ',
     title : "양파",
     price : 110000,
     content : "배추가 맛있어요. 최고입니다.",
+    score: 11,
+    phone:"010-0000-0000",
+    farm:"고구마 스마트팜",
   },
-
   {
     id : 6,
-    name : '김동현',
+    name : '홍ㅇㅇ',
     title : "배추",
     price : 110000,
     content : "배추가 맛있어요. 최고입니다.",
+    score: 12,
+    phone:"010-0000-0000",
+    farm:"고구마 스마트팜",
   },
 ] 
 

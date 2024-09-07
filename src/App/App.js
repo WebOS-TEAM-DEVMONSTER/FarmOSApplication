@@ -37,6 +37,17 @@ function App() {
         navigate(`/detail/${_id}`);
     }
 
+    const onUpScore = (_id)=> {
+        const newProducts = [...products];
+        for(let i = 0; i < newProducts.length; i++) {
+            if(newProducts[i].id === _id){
+                newProducts[i].score += 1;
+                break;
+            }
+        }
+        setProducts(newProducts);
+    }
+
     return (
         <div>
             <Routes>
@@ -47,7 +58,7 @@ function App() {
                 <Route path="/detail/:id" element={<Detail products={products} />} />
                 <Route path="/create" element={<Create onCreate={handleCreate} />} />
                 <Route path="/update/:id" element={<Update onUpdate={onUpdate} products = {products}/>} />
-                <Route path="/userDetail" element={<UserProfile products={products}/>} />
+                <Route path="/userDetail/:id" element={<UserProfile products={products} onUpScore={onUpScore}/>} />
             </Routes>
         </div>
     );
