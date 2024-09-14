@@ -9,13 +9,15 @@ import Signup from './pages/Signup';
 import Create from './pages/Create';
 import Update from './pages/Update'
 import UserProfile from './pages/UserProfile';
+import MyDetail from './pages/MyDetail';
+import Chatting from './pages/Chatting';
 import React from 'react';
 
 function App() {
     const [products, setProducts] = useState(data);
     const [nextId, setNextId] = useState(7);
     const navigate = useNavigate();
-
+   
     const handleCreate = (_title, _price, _content) => {
         const newProducts = [...products];
         newProducts.push({ id: nextId, title: _title, price: _price, content: _content });
@@ -58,7 +60,9 @@ function App() {
                 <Route path="/detail/:id" element={<Detail products={products} />} />
                 <Route path="/create" element={<Create onCreate={handleCreate} />} />
                 <Route path="/update/:id" element={<Update onUpdate={onUpdate} products = {products}/>} />
-                <Route path="/userDetail/:id" element={<UserProfile products={products} onUpScore={onUpScore}/>} />
+                <Route path="/userDetail/:id"  element={<UserProfile products={products} onUpScore={onUpScore}/>} />
+                <Route path="/myDetail" element={<MyDetail products = {products}/>} />
+                <Route path="/chatting" element={<Chatting />} />
             </Routes>
         </div>
     );

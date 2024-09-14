@@ -29,8 +29,8 @@ function CommunityNav() {
           <NavLink className={navStyle.active} to="/community">커뮤니티 홈</NavLink>
           </li>
           <li>
-          <NavLink className={navStyle.active} to="/community">&#9829;</NavLink>
-          <NavLink className={navStyle.active} to="/community">내 게시글</NavLink>
+          <NavLink className={navStyle.active} to="/myDetail">&#9829;</NavLink>
+          <NavLink className={navStyle.active} to="/myDetail">내 게시글</NavLink>
           </li>
           <li>
           <NavLink className={navStyle.active} to="/create">&#9829;</NavLink>

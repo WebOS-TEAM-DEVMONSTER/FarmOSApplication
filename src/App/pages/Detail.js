@@ -2,14 +2,20 @@ import { useParams,useNavigate,Link } from "react-router-dom";
 import Nav from './components/CommunityNav';
 import DetailCss from './css/Detail.module.less';
 import { useState } from "react";
+import Tap from './components/Tap';
 
 function Detail(props) {
   let {id} = useParams();
   const [comment,setComment] = useState(null);
+  const [showTap, setShowTap] = useState(null);
   const handleComment = function (e) {
     setComment(e.target.value);
     console.log(comment)
   }
+  const toggleTap = () => {
+    setShowTap(!showTap);
+  }
+
   let navigate = useNavigate();
   return(
     <>
@@ -20,7 +26,10 @@ function Detail(props) {
             <div className={DetailCss.detail_header}>
               <div className={DetailCss.profile} />
               <h1>{props.products[id].name}</h1>
-             <button onClick={()=>navigate(`/update/${id}`)}>수정하기</button>
+              <span>
+                <button onClick={()=>toggleTap}>&#8942;</button>
+                {showTap && <Tap />}
+              </span>
             </div>
            
               <div className={DetailCss.detail_img}>
