@@ -4,7 +4,8 @@ function Card(props) {
   return(
     <div className={CardCss.item}>
       <div className={CardCss.header} >
-        <div className={CardCss.profile} onClick = {() => {props.userDetailPage();}} />
+        <div className={CardCss.profile} 
+        onClick={() => { props.userDetailPage && props.userDetailPage(); }} />
         <div className={CardCss.name}> {props.product.name}</div>
       </div>  
       <div onClick = {() => {props.handleClick();}}>

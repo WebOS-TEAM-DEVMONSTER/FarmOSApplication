@@ -1,10 +1,15 @@
 import UserDetailCss from "../css/UserDetail.module.less";
+import { useNavigate } from "react-router-dom";
 
 function UserDetail(props) {
+  let navigate = useNavigate();
   return(
     <div className={UserDetailCss.container}>
-      <div className={UserDetailCss.content}>
-        <div className={UserDetailCss.user}>
+      <div className={props.showCss ? UserDetailCss.contentUser :UserDetailCss.contentMy}>
+      {props.showButtons ? null:(
+          <p className={UserDetailCss.Header}>내정보</p>
+        )}
+        <div className={UserDetailCss.user }>
           <p>이름:{props.products[props.id].name}</p>
           <p>전화번호: {props.products[props.id].phone}</p>
           <p>{props.products[props.id].farm}</p>
@@ -19,10 +24,12 @@ function UserDetail(props) {
             <p>채팅하기</p>
           </div>
         </div>
-        <div className={UserDetailCss.click}>
-          <button onClick={()=>{props.onUpScore(props.id)}}>신선함 점수 주기</button>
-          <button>채팅하기</button>
-        </div>
+         {props.showButtons && (
+          <div className={UserDetailCss.click}>
+            <button onClick={() => {props.onUpScore(props.id)}}>신선함 점수 주기</button>
+            <button onClick={()=>navigate('/chatting')}>채팅하기</button>
+          </div>
+        )}
       </div>
     </div>
   )

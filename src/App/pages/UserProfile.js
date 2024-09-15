@@ -17,7 +17,7 @@ function UserProfile(props) {
     <>
       <Nav />
       <div style={{ display: "flex", justifyContent: "center"}}>
-        <UserDetail id={productId} products={props.products} onUpScore={props.onUpScore} />
+        <UserDetail id={productId} products={props.products} onUpScore={props.onUpScore} showButtons = {true} showCss={true}/>
       </div>
       <section>
         <div className={UserProfileCss.wrapper}>

@@ -8,6 +8,7 @@ const data = [
     score: 17,
     phone:"010-0000-0000",
     farm:"고구마 스마트팜",
+    nickname:"kimgguggury",
   },
   {
     id : 1,
@@ -18,6 +19,7 @@ const data = [
     score: 17,
     phone:"010-0000-0000",
     farm:"고구마 스마트팜",
+    nickname:"asdsda",
   },
   {
     id : 2,
@@ -28,6 +30,7 @@ const data = [
     score: 13,
     phone:"010-0000-0000",
     farm:"고구마 스마트팜",
+    nickname:"qweqweqwe",
   },
   {
     id : 3,
@@ -38,6 +41,7 @@ const data = [
     score: 17,
     phone:"010-0000-0000",
     farm:"고구마 스마트팜",
+    nickname:"123123",
   },
   {
     id : 4,
@@ -48,6 +52,7 @@ const data = [
     score: 6,
     phone:"010-0000-0000",
     farm:"고구마 스마트팜",
+    nickname:"123123123",
   },
   {
     id : 5,
@@ -58,6 +63,7 @@ const data = [
     score: 11,
     phone:"010-0000-0000",
     farm:"고구마 스마트팜",
+    nickname:"1231231213312",
   },
   {
     id : 6,
@@ -68,6 +74,7 @@ const data = [
     score: 12,
     phone:"010-0000-0000",
     farm:"고구마 스마트팜",
+    nickname:"aaa31213312",
   },
 ] 
 

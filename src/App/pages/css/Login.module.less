@@ -7,89 +7,91 @@
 	box-sizing: border-box;
 }
 
-
 /* 로그인 폼의 전체적인 레이아웃과 위치 설정 */
 .login{
-	width: 400px;
-	height: 330px;
+	width: 1500px;
+	height: 1500px;
 	position: absolute;
 	top: 50%;  
   left: 50%;
   transform: translate(-50%, -50%);
-	margin: 0;
+}
+
+/* 로그인 폼의 필드셋 스타일 */
+.login > fieldset {
+	width: 1500px;
+	height: 1500px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	display: flex;
+	flex-direction:column;
+	justify-content: space-around;
+	align-items: center;
 }
 /* 로그인 폼의 제목 스타일 */
 .login >fieldset> h1 {
-	font-family: "Nanum Brush Script", cursive;
 	font-weight: 500;
   font-style: normal;
-	font-size:40px;
+	font-size:100px;
 }
-/* 로그인 폼의 필드셋 스타일 */
-.login > fieldset {
-	width: 400px;
-	height: 330px;
-	border: 1px solid #ccc;
-	background-color: #fff;
+.login > fieldset > p {
+	font-size: 50px;
 }
-
-.login > fieldset > h1 {
-	text-align: center;
-	margin: 20px 0px;
-}
-
-/* 입력 필드 리스트 스타일 */
-.login > fieldset > ul {
-	list-style-type: none;
-}
-/* 리스트 아이템 스타일 */
-.login > fieldset > ul > li {
-	text-align: center;
+.phone {
+width: 1200px;
 }
 /* 아이디 입력 필드 스타일 */
 .id {
-	width: 300px;
-	height:40px;
+	width: 700px;
+	height:120px;
 	padding:5px;
 	border: solid black;
-	font-size: 10px;
+	font-size: 80px;
+	flex-grow: 0;
+}
+.phone > button {
+	width:400px;
+	height: 120px;
+	font-size: 50px;
+	float:right;
+	background-color: #DBE7C8;
+	border-radius: 50px;
 }
 /* 비밀번호 입력 필드 스타일 */
 .password{
 	border: solid black;
-	font-size: 10px;
-	width: 300px;
-	height:40px;
+	font-size: 80px;
+	width: 1200px;
+	height:120px;
 	padding:5px;
-	margin-bottom: 20px;
+	flex-grow: 0;
 }
-/* 로그인 버튼과 링크 사이의 간격 추가 */
-.login > fieldset > div {
-	text-align: center;
-	margin-bottom: 10px; /* 로그인 버튼과 아래 링크 사이의 간격 추가 */
-}
+
 /* 로그인 버튼 스타일 */
 .loginButton {
 	display :inline-block;
-	width: 310px;
-	height:25px;
-	border-radius: 10px;
+	width: 1200px;
+	height:120px;
+	border-radius: 50px;
 	background-color:#DBE7C8;
-	margin-bottom: 5px;
 }
-/* 마지막 ul 내의 li에 대한 마진 설정 */
-.login > fieldset >ul:last-of-type > li{
-	maring:20px;
+.login > fieldset > ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수평으로 중앙 정렬 */
+  list-style-type: none;
+	padding-bottom: 20px; 
 }
+
 /* 링크 스타일 */
 .login > fieldset > ul > li > a {
-	font-size: 15px;
+	font-size: 60px;
 	text-decoration: none;
 	color : black;
 }
 /* 작은 텍스트 스타일 */
 .login > fieldset > ul > li > span {
-	font-size:10px;
+	font-size: 40px;
 }
 
 
