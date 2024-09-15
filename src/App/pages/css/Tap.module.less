@@ -1,24 +1,30 @@
 .tap_container {
   position: absolute;
-  background-color: white;
+  background-color: #EDEFE4;
   border: 1px solid #ccc;
   border-radius: 10px;
-  width: 200px;
+  width: 400px;
+  height:220px;
   z-index: 10; /* 탭이 다른 요소 위에 나타나도록 설정 */
+  top:150px;
+  left:1460px;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: column wrap;
+  align-items: center;
 }
 
 .tap_container > ul {
-  list-style: none;
   padding: 10px;
-  margin: 0;
+  list-style: none;
 }
 
 .tap_container > ul > li {
   padding: 10px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 45px;
 }
 
 .tap_container > ul > li:hover {
-  background-color: #f0f0f0;
+  background-color: #EDEFE4;
 }

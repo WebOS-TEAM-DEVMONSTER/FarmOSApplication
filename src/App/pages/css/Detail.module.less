@@ -30,18 +30,18 @@
   margin: 80px 0 0 40px;
 }
 .detail_header > span {
-  margin:0 0 50px 2000px;
-}
-.detail_header > button {
-  background-color: transparent;
-  float: right;
-  color: #344E17;
-  margin: 0 0 0 0;
-  font-size:80px;
   position: relative;
 }
-.detail_header > button:hover {
-  background-color: transparent;
+
+.detail_header > span > button {
+  background-color:  transparent;
+  float: right;
+  color: black;
+  font-size:80px;
+  margin-top:180px;
+}
+.detail_header > span > button:hover {
+  background-color:  transparent;
   position: relative;
 }
 // .detail_content {
@@ -96,33 +96,28 @@
   font-size: 50px;
 }
 .inputBox{
-  margin-top: 100px;
-  position: relative;
+  display: flex; 
+  justify-content: space-between; 
+  width: 2000px;
+  position: fixed; /* 화면에 고정 */
+  bottom: 0; /* 화면 하단에 위치 */
+  margin-bottom: 100px;
 }
 .detail_comment{
-  padding:25px 0 0 5px;
-  margin:50px 0 0 0;
-  width: 2000px;
+  padding:5px 0 0 5px;
+  width: 1500px;
   height: 150px;
-  font-size:60px;
+  font-size : 100px;
   border: solid #344E17;
-  background-color:#E2E3D8;
-    
+  background-color:#E2E3D8;   
+  
 }
-.empytSpan {
-  position: absolute;
-  top:45px;
-  left:5px;
-  font-size:100px;
-  color: gray;
-  transition:1s;
-} 
-.detail_comment:focus ~ span,
-.floating {
-  position: absolute;
-  top:50px;
-  left:5px;
-  font-size:35px;
-  color: gray;
-  transition-duration: 1s;
+
+.inputBox >button {
+  width: 350px;
+  height: 150px;
+  border-radius: 50px;
+  background-color: #4A662C;
+  color: white;
+  margin-left: 20px;
 }

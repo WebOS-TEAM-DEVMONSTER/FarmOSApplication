@@ -27,7 +27,7 @@ function Detail(props) {
               <div className={DetailCss.profile} />
               <h1>{props.products[id].name}</h1>
               <span>
-                <button onClick={()=>toggleTap}>&#8942;</button>
+                <button onClick={toggleTap}>&#8942;</button>
                 {showTap && <Tap />}
               </span>
             </div>
@@ -48,16 +48,13 @@ function Detail(props) {
           </div>
           <form>
             <div className={DetailCss.inputBox}>
-              <input className ={DetailCss.detail_comment}  onChange={handleComment} value={comment}/>
-               <span className={comment?  DetailCss.floating :DetailCss.empytSpan  }>
-                댓글 입력
-              </span>
+              <input className ={DetailCss.detail_comment}  onChange={handleComment} value={comment} placeholder="댓글입력"/>
+              <button>댓글 등록</button>
             </div>
           </form>
           <p style={{margin:"50px 0 0 0"}}>댓글</p>
           <hr style={{margin:"10px 0 0 0"}} />
         </div>
-        
       </div>
       
     </>
