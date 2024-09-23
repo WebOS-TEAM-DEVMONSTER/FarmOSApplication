@@ -8,14 +8,11 @@ function Login() {
 	const [id, setId] = useState("");   // useState 훅을 사용해 'id' 상태를 관리 (초기값은 null)
  	const [passWord,setPassWord] = useState("");
 
-  // 아이디 입력 필드에서 사용자가 입력한 값을 업데이트하는 함수
-  // e.target.value를 사용해 입력된 값을 가져오고 'setId'를 통해 'id' 상태를 변경
+  
 	const handleIdChange = (e) => {
     setId(e.target.value);
   };
 
-  // 비밀번호 입력 필드에서 사용자가 입력한 값을 업데이트하는 함수
-  // e.target.value를 사용해 입력된 값을 가져오고 'setPassWord'를 통해 'passWord' 상태를 변경
   const handlePasswordChange = (e) => {
     setPassWord(e.target.value);
   };

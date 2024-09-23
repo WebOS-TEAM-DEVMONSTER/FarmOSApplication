@@ -12,6 +12,13 @@ function Community(props) {
   return(
     <div>
       <Nav />
+      <form className = {communityCss.header}>
+        <div className={communityCss.searchWrapper}>
+          <input className={communityCss.searchBar}/>
+          <button>A</button>
+        </div>
+     
+      </form>
       <section>
         <div className={communityCss.wrapper}>
           {

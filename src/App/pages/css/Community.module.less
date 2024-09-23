@@ -1,11 +1,41 @@
 body {
   background-color: white;
 }
+.header {
+  display: flex;
+  justify-content: center;
+}
+.searchWrapper{
+  width:1500px;
+  height:150px;
+  position: relative;
+  margin: 100px 0 0 600px;
+}
+.searchBar {
+  position: absolute;
+  width: 1500px;
+  height: 150px;
+  flex-grow: 0;  
+  border-radius: 50px;
+  background-color: #E8E9DE;
+  padding:10px;
+}
+div > .header > .searchWrapper > button {
+  position: absolute;
+  left: 1350px; 
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100px;
+  width: 100px;
+  border: none;
+  border-radius: 50%;
+  background-color: #4A662C;
+}
 .wrapper {
   width: 100%; 
   display: flex;
   flex-wrap: wrap;
   justify-content:space-around;
   align-content: space-around;
-  margin: 0px 0px 0px 600px;
+  margin: 100px 0px 0px 600px;
 }
