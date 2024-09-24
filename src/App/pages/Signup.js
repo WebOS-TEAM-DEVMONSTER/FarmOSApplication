@@ -35,18 +35,21 @@ function Signup() {
     try {
       console.log("***")
       // Axios 인스턴스(api)를 사용하여 요청
-      const response = await axios.post('http://52.63.12.126/api/v1/auth/register', {
+      
+      const uri = 'http://52.63.12.126/api/v1/auth/register';
+     
+      const body = {
         email: email,
         password: password,
         passwordCheck: password,
         username: username,
         phoneNumber: phoneNumber,
-
-      }, {headers: {
+      };
+      
+      const response = await axios.post(uri,body, {headers:{
         'Content-Type': 'application/json',
         'accept': 'application/hal+json'
-      }
-    });
+      } });
 
       
 

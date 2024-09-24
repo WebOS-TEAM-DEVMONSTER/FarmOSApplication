@@ -2,23 +2,62 @@ import styles from "./css/Login.module.less";
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+	const [email, setEmail] = useState("");   // useState 훅을 사용해 'id' 상태를 관리 (초기값은 null)
+ 	const [password,setPassword] = useState("");
+  const [message, setMessage] = useState('');
 
-	const [id, setId] = useState("");   // useState 훅을 사용해 'id' 상태를 관리 (초기값은 null)
- 	const [passWord,setPassWord] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    
+    try {
+      console.log('***');
+      
+      const data ={
+        email: email,
+        password : password,
+      };
   
-	const handleIdChange = (e) => {
-    setId(e.target.value);
+      const response = await axios.post('http://52.63.12.126/api/v1/auth/login',data,{
+        headers: {
+          'Content-Type': 'application/json',
+          'accept': 'application/hal+json',
+        },
+      });
+      
+      //성공 응답 처리
+      if(response.status === 200) {
+        navigate('/');
+      }
+
+
+    } catch(error){
+      if(error.response && error.response.status === 403){
+        setMessage('잘못된 이메일이나 비밀번호입니다. 다시 입력해주세요');
+      } else {
+        setMessage('로그인 요청 중 오류가 발생했습니다.');
+      }
+    }
+  };
+
+	const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    setPassWord(e.target.value);
+    setPassword(e.target.value);
   };
 
-  // 로그인 페이지의 전체 컨테이너에 적용할 인라인 스타일 정의
-  // height: '100vh'는 화면 전체 높이를 의미하며, 배경색을 설정
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  }
+  
+
   const containerStyle = {
     height: '100vh',
     backgroundColor: 	'#F5F6F3', 
@@ -26,18 +65,18 @@ function Login() {
   };
 	return(
 		<div  style={containerStyle}>
-			<form className={styles.login}>
+			<form className={styles.login} onSubmit={handleSubmit}>
 				<fieldset>
           <h1>로그인</h1>
             <label for="id">전화번호 입력 후 인증번호 전송 버튼을 눌러주세요</label>
             <div className={styles.phone}>
-              <input type="text" id= "id"  className={styles.id} value={id} onChange={handleIdChange} placeholder='전화번호' />
+              <input type="text" id= "id"  className={styles.id} value={email} onChange={handleEmailChange} placeholder='이메일' />
               <button>인증번호 전송</button> 
             </div>
-						<label for="id">인증번호 입력 후 인증하기 버튼을 눌러주세요</label>
-            <input type="password" id="password" value = {passWord} className={styles.password} onChange={handlePasswordChange} placeholder='인증번호'/>
+						<label for="password">인증번호 입력 후 인증하기 버튼을 눌러주세요</label>
+            <input type="password" id="password" value = {password} className={styles.password} onChange={handlePasswordChange} placeholder='비밀번호'/>
           <div>
-					  <button className={styles.loginButton}>인증하기</button>
+					  <button className={styles.loginButton} type="submit">로그인하기</button>
           </div>
           <ul>
             <li><span>아직 회원이 아니신가요?</span>  <Link to="/signup">회원가입</Link></li>
