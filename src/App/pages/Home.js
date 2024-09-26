@@ -1,24 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import HomeCss from "./css/Home.module.css";
+import Nav from './components/CommunityNav';
 
 function Home() {
   let navigate = useNavigate();
   return (
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}>
-      <div className={HomeCss.container}>
-        <div className={HomeCss.profile}>
-          <div className= {HomeCss.photo} />
-          <h1>유저님<br />스마트팜</h1>
-        </div>
-        <div className={HomeCss.content}>
-          <div className={HomeCss.box}><h1>CCTV</h1></div>
-          <div className={HomeCss.box}><h1>온도/습도/토양</h1></div>
-          <div className={HomeCss.box}><h1>건강리포트</h1></div>
-          <div className={HomeCss.box} onClick={()=>{ navigate('/community') }}><h1>게시판</h1></div>
-        </div>
+    <div className="flex h-screen">
+      {/* 왼쪽 Nav 컴포넌트 */}
+      <div className="w-1/4 bg-gray-100">
+        <Nav />
+      </div>
+
+      {/* 오른쪽 텍스트 영역 */}
+      <div className="w-3/4 relative p-4">
+        <section>
+          {/* 배경 박스 */}
+          <div className="w-full h-48 bg-white rounded-2xl" />
+          
+          {/* 첫 번째 텍스트 (카테고리 정보) */}
+          <div className="absolute left-8 top-16 text-[#1a1c16] text-4xl font-bold font-['Roboto'] leading-snug">
+            %formCategory% 스마트팜에 입장하셨습니다.
+          </div>
+
+          {/* 두 번째 텍스트 (OWNER 정보) */}
+          <div className="absolute left-8 top-32 text-[#1a1c16] text-3xl font-normal font-['Roboto'] leading-snug">
+            OWNER<br/>%USERNAME% 님.
+          </div>
+        </section>
       </div>
     </div>
-  )
+  );
 }
 
 export default Home;
