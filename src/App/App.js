@@ -4,6 +4,7 @@ import Community from "./pages/Community";
 import Detail from "./pages/Detail";
 import data from "../data";
 import Login from "./pages/Login";
+import Farmsystem from "./pages/Farmsystem";
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Create from './pages/Create';
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/userDetail/:id"  element={<UserProfile products={products} onUpScore={onUpScore}/>} />
                 <Route path="/myDetail" element={<MyDetail products = {products}/>} />
                 <Route path="/chatting" element={<Chatting />} />
+                <Route path="/farmsystem" element={<Farmsystem />} />
             </Routes>
         </div>
     );
