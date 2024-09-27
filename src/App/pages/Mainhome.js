@@ -7,7 +7,6 @@ const Mainhome = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-white">
-      {/* 왼쪽 사용자 정보 */}
       <div className="flex flex-col items-center mr-10">
         
         <div className="w-32 h-32 bg-green-400 rounded-full flex justify-center items-center mb-4">
@@ -16,17 +15,17 @@ const Mainhome = () => {
         
        
         <div className="text-[#1a1c16] text-[45px] font-normal font-['Roboto'] leading-tight text-center">
-          %USERNAME%님
+          %USERNAME%님 {/*user api 가져오기*/}
         </div>
         <div className="text-[#1a1c16] text-[45px] font-normal font-['Roboto'] leading-tight text-center">
           스마트팜
         </div>
       </div>
 
-      {/* 오른쪽 스마트팜 목록 */}
+      
       <div className="flex flex-col gap-4">
         {items.map((item, index) => (
-          <Maincard key={index} title={item} />
+          <Maincard key={index} title={item} />   
         ))}
       </div>
     </div>
