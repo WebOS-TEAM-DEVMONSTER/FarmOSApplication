@@ -6,10 +6,9 @@ function Home() {
   return (
     <>
       <div className="flex w-screen h-screen bg-white">
-        {/* Nav 컴포넌트 */}
-        <Nav />
         
-        {/* 오른쪽 텍스트 섹션 */}
+        <Nav />
+
         <section className="flex-grow h-full p-10 bg-white flex flex-col items-end">
           <h1 className="w-full text-center text-[#1a1c16] text-7xl font-bold mb-10">스마트팜 상태 확인</h1>
 
