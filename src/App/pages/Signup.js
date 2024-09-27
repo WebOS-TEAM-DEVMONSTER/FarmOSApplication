@@ -75,11 +75,11 @@ function Signup() {
     <div>
       <form className={signupCss.container}>
         <fieldset>
+          <div className={signupCss.content}>
           <div className={signupCss.header}>
             <h1>회원가입</h1>
             <hr />
           </div>
-          <div className={signupCss.content}>
             <p>이메일을 입력해주세요</p>
             <input
               value={email}
@@ -119,10 +119,12 @@ function Signup() {
 
             {errorMessage && <p className={signupCss.error}>{errorMessage}</p>}
             {successMessage && <p className={signupCss.success}>{successMessage}</p>}
+            
+            <div className={signupCss.footer}>
+              <Link to="/login">로그인하러 가기</Link>
+            </div>
           </div>
-          <div className={signupCss.footer}>
-            <Link to="/login">로그인하러 가기</Link>
-          </div>
+        
         </fieldset>
       </form>
     </div>
