@@ -12,6 +12,7 @@ import Update from './pages/Update'
 import UserProfile from './pages/UserProfile';
 import MyDetail from './pages/MyDetail';
 import Chatting from './pages/Chatting';
+import Mainhome from './pages/Mainhome';
 import React from 'react';
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 <Route path="/myDetail" element={<MyDetail products = {products}/>} />
                 <Route path="/chatting" element={<Chatting />} />
                 <Route path="/farmsystem" element={<Farmsystem />} />
+                <Route path="/mainhome" element={<Mainhome/>} />
             </Routes>
         </div>
     );
