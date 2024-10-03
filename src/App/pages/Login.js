@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+import Cookies from 'js-cookie';
+
 function Login() {
   const navigate = useNavigate();
 	const [email, setEmail] = useState("");   // useState 훅을 사용해 'id' 상태를 관리 (초기값은 null)
@@ -27,12 +29,16 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
           'accept': 'application/hal+json',
+          
+
         },
-      });
+      }); //로그인하면 accesstoken과 refreshtoken이 주어짐. 헤더에 accesstoken을 넣어야함
       
-      //성공 응답 처리
-      if(response.status === 200) {
-        navigate('/');
+      if (response.status === 200) {
+        const { accessToken } = response.data; // 서버로부터 accessToken 받기
+        Cookies.set('accessToken', accessToken, {expires:180});
+  
+        navigate('/mainhome'); // 로그인 성공 후 페이지 이동
       }
 
 

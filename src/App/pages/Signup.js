@@ -1,22 +1,10 @@
-import { func } from "prop-types";
-import signupCss from "./css/signup.module.less";
-import {useState} from 'react';
-import { Link } from "react-router-dom";
-
+import styles from "./css/signup.module.less";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom"; // useNavigate import
 import axios from 'axios';
 
-
-
-
-import api from '../service/api';
-
-
 function Signup() {
-  //const [name, setName] = useState("");
-  // function handle(e) {
-  //   setName(e.target.value)
-  // }
-
+  const navigate = useNavigate(); // useNavigate 훅을 초기화하여 navigate 함수 사용
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setName] = useState("");
@@ -33,11 +21,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      console.log("***")
-      // Axios 인스턴스(api)를 사용하여 요청
-      
       const uri = 'http://52.63.12.126/api/v1/auth/register';
-     
       const body = {
         email: email,
         password: password,
@@ -46,45 +30,48 @@ function Signup() {
         phoneNumber: phoneNumber,
       };
       
-      const response = await axios.post(uri,body, {headers:{
-        'Content-Type': 'application/json',
-        'accept': 'application/hal+json'
-      } });
+      const response = await axios.post(uri, body, {
+        headers: {
+          'Content-Type': 'application/json',
+          'accept': 'application/hal+json'
+        }
+      });
 
-      
+      // 성공 응답 처리
+      if (response.status === 200) {
+        setSuccessMessage("회원가입이 성공적으로 완료되었습니다.");
+        // 회원가입 성공 후 페이지 이동
+        navigate('/login'); // 성공 시 이동할 경로 (예: 회원가입 성공 페이지)
+      }
 
-
-      // if (response.status === 200) {
-      //   setSuccessMessage("회원가입이 성공적으로 완료되었습니다.");
-      // }
     } catch (error) {
       if (error.response) {
-        // 서버에서 반환된 오류 메시지 출력
         console.log('서버 응답 오류:', error.response.data);
+        setErrorMessage('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
       } else if (error.request) {
-        // 요청이 서버에 도달하지 못했을 때
         console.log('요청이 전송되지 않았습니다.');
+        setErrorMessage('서버와 연결되지 않았습니다.');
       } else {
         console.log('기타 오류:', error.message);
+        setErrorMessage('알 수 없는 오류가 발생했습니다.');
       }
     }
   };
 
-  
-  return(
+  return (
     <div>
-      <form className={signupCss.container}>
+      <form className={styles.container} onSubmit={handleSignup}>
         <fieldset>
-          <div className={signupCss.content}>
-          <div className={signupCss.header}>
-            <h1>회원가입</h1>
-            <hr />
-          </div>
+          <div className={styles.content}>
+            <div className={styles.header}>
+              <h1>회원가입</h1>
+              <hr />
+            </div>
             <p>이메일을 입력해주세요</p>
             <input
               value={email}
               onChange={handleEmailChange}
-              className={signupCss.nameInput}
+              className={styles.nameInput}
               id="email"
               placeholder="이메일"
             />
@@ -93,7 +80,7 @@ function Signup() {
               type="password"
               value={password}
               onChange={handlePasswordChange}
-              className={signupCss.nameInput}
+              className={styles.nameInput}
               id="password"
               placeholder="비밀번호"
             />
@@ -102,7 +89,7 @@ function Signup() {
               type="name"
               value={username}
               onChange={handleNameChange}
-              className={signupCss.nameInput}
+              className={styles.nameInput}
               id="name"
               placeholder="이름"
             />
@@ -111,24 +98,23 @@ function Signup() {
               type="phone"
               value={phoneNumber}
               onChange={handlePhoneChange}
-              className={signupCss.nameInput}
+              className={styles.nameInput}
               id="phone"
               placeholder="휴대폰번호"
             />
-            <button onClick={handleSignup}>회원가입</button>
+            <button type="submit">회원가입</button>
 
-            {errorMessage && <p className={signupCss.error}>{errorMessage}</p>}
-            {successMessage && <p className={signupCss.success}>{successMessage}</p>}
+            {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+            {successMessage && <p className={styles.success}>{successMessage}</p>}
             
-            <div className={signupCss.footer}>
+            <div className={styles.footer}>
               <Link to="/login">로그인하러 가기</Link>
             </div>
           </div>
-        
         </fieldset>
       </form>
     </div>
-  )
+  );
 }
 
 export default Signup;
