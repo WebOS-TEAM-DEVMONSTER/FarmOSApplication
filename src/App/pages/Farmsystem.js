@@ -1,5 +1,6 @@
 import Nav from './components/CommunityNav';
 import Temperature from './components/Temperature';
+import StatusCard2 from './components/StatusCard2';
 import Humidity from './components/Humidity';
 import SoilStatus from './components/SoilStatus';
 import PlantStatus from './components/PlantStatus';

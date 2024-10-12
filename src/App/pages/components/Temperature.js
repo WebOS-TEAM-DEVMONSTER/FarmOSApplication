@@ -1,13 +1,15 @@
 import React from 'react';
-import StatusCard from './StatusCard';
+import StatusCard2 from './StatusCard2';
 
 const Temperature = () => {
   return (
-    <StatusCard
+    <StatusCard2
+      buttontext="온도 조절"
+      nowstate="현재 온도"
+      nownum="65.7"
       title="온도"
-      subtitle="현재 온도"
-      content="65.7°C"
-      warning="내부 온도가 높습니다. 내부 온도를 낮춰주세요."
+      warning="내부 온도가 높습니다 내부 온도를 낮추세오."
+    
     />
   );
 };
