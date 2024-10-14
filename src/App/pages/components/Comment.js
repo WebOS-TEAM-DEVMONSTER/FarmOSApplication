@@ -14,6 +14,7 @@ function CommentSection(props) {
   // 댓글 입력 핸들러
   const handleComment = (e) => {
     setComment(e.target.value);
+    console.log('Comment:', e.target.value); // 입력된 댓글 로그 출력 (디버깅용)
   };
 
   // 댓글 데이터 불러오기
@@ -41,6 +42,11 @@ function CommentSection(props) {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
+
+      if (!accessToken) {
+        console.error('No access token found. Please log in.');
+        return;
+      }
 
       try {
         // 현재 사용자 정보 호출
@@ -95,11 +101,16 @@ function CommentSection(props) {
     e.preventDefault(); // 새로고침 방지
     const accessToken = Cookies.get('accessToken'); // accessToken 가져오기
 
+    if (!accessToken) {
+      console.error('No access token found. Please log in.');
+      return; // 토큰이 없으면 함수 종료
+    }
+
     try {
       // 댓글 등록
       await axios.post(
         `http://52.63.12.126/api/v1/comments/post/${postId}`,
-        { content: comment },
+        { content: comment }, // 댓글 내용 (필요한 다른 데이터가 있는지 확인)
         {
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -118,7 +129,7 @@ function CommentSection(props) {
       console.log('Comments after submit:', response.data); // 댓글 등록 후 데이터 확인
       setComments(response.data); // 댓글 갱신
     } catch (error) {
-      console.error('Error posting comment:', error);
+      console.error('Error posting comment:', error.response ? error.response.data : error.message); // 서버 에러 출력
     }
   };
 

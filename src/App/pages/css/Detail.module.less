@@ -16,6 +16,8 @@
 .detail_header {
   grid-column: 1/5;
   grid-row-start: 1;
+  display: flex;
+  align-items: center; 
 }
 
 .profile {
@@ -25,25 +27,53 @@
   border-radius: 50%;
   background-color: tomato;
   margin: 50px 0 0 0;
-  float: left;
 }
 
-.detail_header > h1 {
-  float: left;
+.username {
   font-size: 100px;
-  margin: 80px 0 0 40px;
 }
 
-.detail_header > span {
-  position: relative;
+.more_options {
+  margin-left: auto; /* 점 3개 버튼을 오른쪽으로 이동 */
+  position: relative; /* 드롭박스가 이 span을 기준으로 위치 */
 }
 
-.detail_header > span > button {
+.more_options > button {
   background-color: transparent;
-  float: right;
   color: black;
-  font-size: 80px;
-  margin-top: 180px;
+  font-size: 100px; /* 점 3개 버튼 크기 조절 */
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
+
+/* 드롭다운 메뉴 */
+.dropdown_menu {
+  position: absolute;
+  top: 100%; /* 버튼 바로 아래 */
+  right: 0; /* 부모 요소(span)의 오른쪽 끝에 맞추기 */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* 둥근 모서리 크게 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* 드롭다운 메뉴 안쪽 공간 확대 */
+  width: 300px; /* 드롭다운 메뉴의 너비 */
+}
+
+.dropdown_menu > button {
+  background-color: transparent;
+  border: none;
+  padding: 20px; /* 각 버튼을 크게 만들기 위한 패딩 */
+  cursor: pointer;
+  font-size: 24px; /* 버튼의 폰트 크기 확대 */
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dropdown_menu > button:hover {
+  background-color: #f0f0f0;
 }
 
 .detail_img {
@@ -63,20 +93,16 @@
   transform: translate(-50%, -50%);
 }
 
-/* 제목 부분 수정 */
+/* 제목 부분 */
 .detail_title {
   grid-column-start: 3;
   grid-row-start: 2;
   background-color: #E2E3D8;
-  white-space: normal; /* 텍스트 줄바꿈 허용 */
-  word-wrap: break-word; /* 긴 단어 줄바꿈 */
 }
 
 .detail_title > h1 {
   margin: 20px 0 0 0;
   font-size: 70px;
-  white-space: normal; /* 텍스트 줄바꿈 허용 */
-  word-wrap: break-word; /* 긴 단어 줄바꿈 */
 }
 
 .detail_price {
@@ -100,4 +126,25 @@
 
 .detail_info > p {
   font-size: 50px;
+}
+
+/* 구매 버튼 */
+.buy_button_container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.buy_button {
+  background-color: #ff4500;
+  color: white;
+  font-size: 30px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.buy_button:hover {
+  background-color: #ff6347;
 }

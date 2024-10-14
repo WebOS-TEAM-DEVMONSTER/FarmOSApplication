@@ -39,7 +39,8 @@ function Card({ product, userDetailPage, handleClick }) {
               <p className={CardCss.product_farm}>농장: {farm ? farm.farmName : 'Unknown Farm'}</p> {/* 농장 이름 */}
             </li>
             <li>
-              <p className={CardCss.product_status}>상태: {saleStatus}</p> {/* 판매 상태 */}
+              {/* 판매 상태에 따라 다르게 표시 */}
+              <p className={CardCss.product_status}>상태: {saleStatus === 'ON_SALE' ? 'ON_SALE' : 'NOT_SALE'}</p> {/* 판매 상태 */}
             </li>
           </ul>
         </div>
