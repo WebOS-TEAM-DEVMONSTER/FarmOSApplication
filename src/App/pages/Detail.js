@@ -2,78 +2,119 @@ import { useParams, useNavigate } from "react-router-dom";
 import Nav from './components/CommunityNav';
 import DetailCss from './css/Detail.module.less';
 import { useState, useEffect } from "react";
-import Tap from './components/Tap';
-import axios from 'axios';
 import Cookies from 'js-cookie';
-import CommentSection from './components/Comment'; // 댓글 컴포넌트 추가
+import CommentSection from './components/Comment';
+import axios from "axios";
 
 function Detail(props) {
-  let { id } = useParams(); // URL에서 id를 추출
-  const [postData, setPostData] = useState(null); // 게시물 데이터 상태
-  const [currentUser, setCurrentUser] = useState(''); // 현재 사용자 이름
-  const [postAuthorId, setPostAuthorId] = useState(''); // 게시글 작성자 ID
+  let { id } = useParams();
+  const [postData, setPostData] = useState(null);
+  const [currentUser, setCurrentUser] = useState('');
+  const [postAuthorId, setPostAuthorId] = useState('');
+  const [currentUserId, setCurrentUserId] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
 
   let navigate = useNavigate();
 
-  // 페이지가 로드될 때 API 호출
+  // 게시글 데이터를 불러오는 함수
+  const fetchPostData = async () => {
+    try {
+      const response = await axios.get(`http://52.63.12.126/api/v1/posts/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('accessToken')}`,
+          'accept': 'application/hal+json'
+        }
+      });
+
+      if (response.data && response.data.user && response.data.user.username) {
+        setPostData(response.data);
+        setPostAuthorId(response.data.user.id);
+      } else {
+        console.error('Invalid response structure:', response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching post data:', error);
+    }
+  };
+
+  // 현재 사용자 정보를 불러오는 함수
+  const fetchCurrentUser = async () => {
+    try {
+      const response = await axios.get(`http://52.63.12.126/api/v1/user/my`, {
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('accessToken')}`,
+          'accept': 'application/hal+json'
+        }
+      });
+
+      if (response.data && response.data.id) {
+        setCurrentUser(response.data.username);
+        setCurrentUserId(response.data.id);
+      } else {
+        console.error('Invalid currentUser response structure:', response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching current user data:', error);
+    }
+  };
+
+  // 페이지가 로드될 때 데이터를 불러옴
   useEffect(() => {
-    const fetchPostData = async () => {
-      const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
-
-      try {
-        // 게시글 데이터 호출
-        const response = await axios.get(`http://52.63.12.126/api/v1/posts/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`, // 쿠키에서 가져온 토큰을 헤더에 넣기
-            'accept': 'application/hal+json'
-          }
-        });
-
-        console.log('API Response:', response.data); // 응답 데이터 구조 확인을 위해 추가
-
-        if (response.data && response.data.user && response.data.user.username) {
-          setPostData(response.data); // API 응답 데이터를 상태에 저장
-          setPostAuthorId(response.data.user.id); // 게시글 작성자 ID 저장
-        } else {
-          console.error('Invalid response structure:', response.data);
-        }
-      } catch (error) {
-        console.error('Error fetching post data:', error);
-      }
-    };
-
-    const fetchCurrentUser = async () => {
-      const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
-
-      try {
-        // 현재 사용자 정보 호출
-        const response = await axios.get(`http://52.63.12.126/api/v1/users/me`, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`, // 쿠키에서 가져온 토큰을 헤더에 넣기
-            'accept': 'application/hal+json'
-          }
-        });
-
-        console.log('Current User Response:', response.data); // 응답 데이터 구조 확인을 위해 추가
-
-        if (response.data && response.data.username) {
-          setCurrentUser(response.data.username); // 현재 로그인한 사용자 이름 저장
-        } else {
-          console.error('Invalid currentUser response structure:', response.data);
-        }
-      } catch (error) {
-        console.error('Error fetching current user data:', error);
-      }
-    };
-
-    fetchPostData(); // 게시글 데이터 호출
-    fetchCurrentUser(); // 현재 사용자 정보 호출
+    fetchPostData();
+    fetchCurrentUser();
   }, [id]);
 
-  // postData가 아직 로드되지 않았을 때 로딩 메시지 출력
+  // 드롭다운 메뉴 토글 함수
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  // 게시글 수정 페이지로 이동
+  const handleUpdateClick = () => {
+    navigate(`/update/${id}`);
+  };
+
+  // 게시글 삭제 요청
+  const handleDeleteClick = async () => {
+    const accessToken = Cookies.get('accessToken');
+
+    try {
+      await axios.delete(`http://52.63.12.126/api/v1/posts/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'accept': 'application/hal+json'
+        }
+      });
+
+      navigate('/community');
+    } catch (error) {
+      console.error('게시글 삭제 실패:', error.response ? error.response.data : error.message);
+    }
+  };
+
+  // 게시글 판매 요청 (구매자 ID를 전달)
+  const handleSellClick = async () => {
+    const accessToken = Cookies.get('accessToken');
+    const buyerId = "66f1013a786d695f329de0db"; // 구매자 ID 하드코딩, 변경 가능
+
+    try {
+      await axios.patch(`http://52.63.12.126/api/v1/posts/${id}/sell?buyerId=${buyerId}`, null, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'accept': 'application/hal+json'
+        }
+      });
+      navigate('/community');
+    } catch (error) {
+      console.error('판매 요청 실패:', error.response ? error.response.data : error.message);
+    }
+  };
+
   if (!postData) {
     return <div>Loading...</div>;
   }
+
+  const isPostAuthor = currentUserId === postAuthorId;
 
   return (
     <>
@@ -83,11 +124,18 @@ function Detail(props) {
           <div className={DetailCss.detail_wrapper}>
             <div className={DetailCss.detail_header}>
               <div className={DetailCss.profile} />
-              <h1>{postData.user && postData.user.username ? postData.user.username : 'Unknown User'}</h1>
-              <span>
-                <button>&#8942;</button>
-                {/* Tap 버튼 (간단히 유지) */}
-              </span>
+              <h1 className={DetailCss.username}>{postData.user && postData.user.username ? postData.user.username : 'Unknown User'}</h1>
+              {isPostAuthor && (
+                <span className={DetailCss.more_options}>
+                  <button onClick={toggleDropdown}>&#8942;</button>
+                  {showDropdown && (
+                    <div className={DetailCss.dropdown_menu}>
+                      <button onClick={handleUpdateClick}>수정하기</button>
+                      <button onClick={handleDeleteClick}>삭제하기</button>
+                    </div>
+                  )}
+                </span>
+              )}
             </div>
 
             <div className={DetailCss.detail_img}>
@@ -95,20 +143,24 @@ function Detail(props) {
             </div>
 
             <div className={DetailCss.detail_title}>
-              <h1>{postData.title}</h1> {/* postData가 로드된 후 제목 출력 */}
+              <h1>{postData.title}</h1>
             </div>
 
             <div className={DetailCss.detail_price}>
-              <p>{postData.price}원</p> {/* postData가 로드된 후 가격 출력 */}
+              <p>{postData.price}원</p>
             </div>
 
             <div className={DetailCss.detail_info}>
-              <p>{postData.content}</p> {/* postData가 로드된 후 내용 출력 */}
+              <p>{postData.content}</p>
             </div>
-          </div>
+            
+            {/* 구매 버튼 추가 */}
+            <div className={DetailCss.buy_button_container}>
+              <button onClick={handleSellClick} className={DetailCss.buy_button}>구매!</button>
+            </div>
 
-          {/* 댓글 컴포넌트에 props로 넘기기 */}
-          <CommentSection postId={id} currentUser={currentUser} postAuthorId={postAuthorId} {...props} />
+            <CommentSection postId={id} currentUser={currentUser} postAuthorId={postAuthorId} {...props} />
+          </div>
         </div>
       </div>
     </>
