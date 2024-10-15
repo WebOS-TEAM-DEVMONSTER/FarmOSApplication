@@ -31,10 +31,11 @@
 
 .username {
   font-size: 100px;
+  margin:30px 0 0 30px;
 }
 
 .more_options {
-  margin-left: auto; /* 점 3개 버튼을 오른쪽으로 이동 */
+  margin: 50px 0 0 auto; /* 점 3개 버튼을 오른쪽으로 이동 */
   position: relative; /* 드롭박스가 이 span을 기준으로 위치 */
 }
 
@@ -128,23 +129,21 @@
   font-size: 50px;
 }
 
-/* 구매 버튼 */
-.buy_button_container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.buy_button {
-  background-color: #ff4500;
+/* 구매 버튼 스타일 */
+.buy {
+  display: block;
+  float: right;
+  background-color: #28a745; /* 녹색 버튼 */
   color: white;
-  font-size: 30px;
+  font-size: 24px;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  margin-top: 20px; /* 버튼과 위 요소 간격 */
+  margin-bottom: 20px; /* 버튼과 댓글 사이 간격 추가 */
 }
 
-.buy_button:hover {
-  background-color: #ff6347;
+.buy:hover {
+  background-color: #218838; /* 마우스 오버 시 진한 녹색 */
 }

@@ -11,7 +11,7 @@ function Detail(props) {
   const [postData, setPostData] = useState(null);
   const [currentUser, setCurrentUser] = useState('');
   const [postAuthorId, setPostAuthorId] = useState('');
-  const [currentUserId, setCurrentUserId] = useState('');
+  const [currentUserId, setCurrentUserId] = useState(''); // 로그인한 사용자 ID 저장
   const [showDropdown, setShowDropdown] = useState(false);
 
   let navigate = useNavigate();
@@ -37,10 +37,10 @@ function Detail(props) {
     }
   };
 
-  // 현재 사용자 정보를 불러오는 함수
+  // 로그인한 사용자 정보를 가져오는 함수
   const fetchCurrentUser = async () => {
     try {
-      const response = await axios.get(`http://52.63.12.126/api/v1/user/my`, {
+      const response = await axios.get('http://52.63.12.126/api/v1/user/my', {
         headers: {
           'Authorization': `Bearer ${Cookies.get('accessToken')}`,
           'accept': 'application/hal+json'
@@ -49,7 +49,7 @@ function Detail(props) {
 
       if (response.data && response.data.id) {
         setCurrentUser(response.data.username);
-        setCurrentUserId(response.data.id);
+        setCurrentUserId(response.data.id); // 로그인한 사용자 ID 설정
       } else {
         console.error('Invalid currentUser response structure:', response.data);
       }
@@ -61,7 +61,7 @@ function Detail(props) {
   // 페이지가 로드될 때 데이터를 불러옴
   useEffect(() => {
     fetchPostData();
-    fetchCurrentUser();
+    fetchCurrentUser(); // 로그인한 사용자 정보 로드
   }, [id]);
 
   // 드롭다운 메뉴 토글 함수
@@ -92,13 +92,12 @@ function Detail(props) {
     }
   };
 
-  // 게시글 판매 요청 (구매자 ID를 전달)
+  // 게시글 판매 요청 (로그인한 사용자 ID를 전달)
   const handleSellClick = async () => {
     const accessToken = Cookies.get('accessToken');
-    const buyerId = "66f1013a786d695f329de0db"; // 구매자 ID 하드코딩, 변경 가능
 
     try {
-      await axios.patch(`http://52.63.12.126/api/v1/posts/${id}/sell?buyerId=${buyerId}`, null, {
+      await axios.patch(`http://52.63.12.126/api/v1/posts/${id}/sell?buyerId=${currentUserId}`, null, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
           'accept': 'application/hal+json'
@@ -153,12 +152,9 @@ function Detail(props) {
             <div className={DetailCss.detail_info}>
               <p>{postData.content}</p>
             </div>
-            
-            {/* 구매 버튼 추가 */}
-            <div className={DetailCss.buy_button_container}>
-              <button onClick={handleSellClick} className={DetailCss.buy_button}>구매!</button>
-            </div>
-
+          </div>
+          <button className={DetailCss.buy} onClick={handleSellClick}>구매하기</button> {/* 로그인한 사용자 ID로 판매 요청 */}
+          <div className={DetailCss.comment_section}>
             <CommentSection postId={id} currentUser={currentUser} postAuthorId={postAuthorId} {...props} />
           </div>
         </div>
