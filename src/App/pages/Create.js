@@ -5,12 +5,14 @@ import "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom"; // useNavigate 가져오기
 
-function Create (props) {
-
+function Create(props) {
   const [farms, setFarms] = useState([]);
   const [selectedFarmId, setSelectedFarmId] = useState("");
   const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
+  const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 사용
+
   // 농장 목록을 서버에서 가져오는 함수
   useEffect(() => {
     const fetchFarms = async () => {
@@ -67,11 +69,10 @@ function Create (props) {
               headers: header
             });
             console.log('Post created successfully:', response.data);
+            navigate('/community'); // 게시글이 성공적으로 생성되면 /community로 이동
           } catch (error) {
             console.error('There was an error creating the post!', error);
           }
-          console.log("*");
-          // props.onCreate(title,price,content);
         }}
       >
         <div className={createCss.container}>
