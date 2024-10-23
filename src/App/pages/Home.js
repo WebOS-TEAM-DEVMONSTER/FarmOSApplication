@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Nav from './components/CommunityNav';
+import { GlobalContext } from '../../global_provider';
 
 function Home() {
   const { id } = useParams(); // URL에서 농장 ID 가져오기
   const [farm, setFarm] = useState(null);
   const [username, setUsername] = useState('');
-  const accessToken = Cookies.get('accessToken');
+  const { accessToken } = useContext(GlobalContext);
 
   useEffect(() => {
     const fetchUsername = async () => {

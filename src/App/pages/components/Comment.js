@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import CommentCss from '../css/Comment.module.less'; // Comment용 CSS
+import { GlobalContext } from "../../../global_provider";
 
 function CommentSection(props) {
   const [postId, setPostId] = useState(props.postId); // props로 받은 postId를 상태로 관리
@@ -10,6 +11,7 @@ function CommentSection(props) {
   const [comment, setComment] = useState(''); // 댓글 입력 상태
   const [comments, setComments] = useState([]); // 댓글 리스트 상태
   const [menuOpen, setMenuOpen] = useState(null); // 드롭다운 메뉴 상태
+  const { accessToken } = useContext(GlobalContext); // GlobalContext에서 accessToken 가져오기
 
   // 댓글 입력 핸들러
   const handleComment = (e) => {
@@ -20,7 +22,6 @@ function CommentSection(props) {
   // 댓글 데이터 불러오기
   useEffect(() => {
     const fetchComments = async () => {
-      const accessToken = Cookies.get('accessToken'); // accessToken 가져오기
       try {
         const response = await axios.get(`http://52.63.12.126/api/v1/comments/post/${postId}`, {
           headers: {
@@ -41,7 +42,6 @@ function CommentSection(props) {
   // 현재 사용자 정보 불러오기
   useEffect(() => {
     const fetchCurrentUser = async () => {
-      const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
 
       if (!accessToken) {
         console.error('No access token found. Please log in.');
@@ -74,7 +74,6 @@ function CommentSection(props) {
 
   // 댓글 삭제 함수
   const handleDelete = async (commentId) => {
-    const accessToken = Cookies.get('accessToken');
 
     try {
       await axios.delete(`http://52.63.12.126/api/v1/comments/${commentId}`, {
@@ -99,7 +98,6 @@ function CommentSection(props) {
   // 댓글 등록 함수
   const handleCommentSubmit = async (e) => {
     e.preventDefault(); // 새로고침 방지
-    const accessToken = Cookies.get('accessToken'); // accessToken 가져오기
 
     if (!accessToken) {
       console.error('No access token found. Please log in.');

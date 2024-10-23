@@ -3,14 +3,15 @@ import "react";
 import createCss from "./css/Create.module.less";
 import "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom"; // useNavigate 가져오기
+import { GlobalContext } from "../../global_provider";
 
 function Create(props) {
   const [farms, setFarms] = useState([]);
   const [selectedFarmId, setSelectedFarmId] = useState("");
-  const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
+  const { accessToken } = useContext(GlobalContext);
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 사용
 
   // 농장 목록을 서버에서 가져오는 함수
@@ -34,7 +35,7 @@ function Create(props) {
     };
   
     fetchFarms();
-  }, [accessToken]);
+  }); // useEffect의 의존성 배열에 accessToken 추가
 
   const handleFarmChange = (e) => {
     setSelectedFarmId(e.target.value);

@@ -1,15 +1,18 @@
 import Nav from './components/CommunityNav';
 import communityCss from './css/Community.module.less';
 import Card from './components/Card';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { GlobalContext } from '../../global_provider';
 
 function Community() {
   const [products, setProducts] = useState([]); // 서버에서 받아온 데이터를 저장하는 상태
   const [loading, setLoading] = useState(true); // 로딩 상태 관리
-  const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
+  const { accessToken } = useContext(GlobalContext); // GlobalContext에서 accessToken 가져오기
+  //const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
+  
   let navigate = useNavigate();
 
   // 서버에서 데이터 불러오기

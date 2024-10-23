@@ -1,13 +1,14 @@
 import Maincard from './components/Maincard';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { GlobalContext } from '../../global_provider';
 
 const Mainhome = () => {
   const [username, setUsername] = useState('');
   const [farms, setFarms] = useState([]);
-  const accessToken = Cookies.get('accessToken');
+  const { accessToken } = useContext(GlobalContext);
 
   useEffect(() => {
     console.log("Access Token:", accessToken);

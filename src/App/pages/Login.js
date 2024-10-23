@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
+import { GlobalContext } from '../../global_provider';
 import Cookies from 'js-cookie';
 
 function Login() {
@@ -12,7 +12,7 @@ function Login() {
 	const [email, setEmail] = useState("");   // useState 훅을 사용해 'id' 상태를 관리 (초기값은 null)
  	const [password,setPassword] = useState("");
   const [message, setMessage] = useState('');
-
+  const { accessToken, setAccessToken } = React.useContext(GlobalContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,12 +32,16 @@ function Login() {
           
 
         },
-      }); //로그인하면 accesstoken과 refreshtoken이 주어짐. 헤더에 accesstoken을 넣어야함
-      
+      }); //로그인하면 accesstoken과 refreshtoken이 주어짐. 헤더에 accesstoken을 넣어야
+      console.log('----');
+      console.log(response);
+      console.log('----');
+
       if (response.status === 200) {
-        const { accessToken } = response.data; // 서버로부터 accessToken 받기
-        Cookies.set('accessToken', accessToken, {expires:180});
-  
+        const { accessToken } = response.data["accessToken"]; // 서버로부터 accessToken 받기
+        console.log(response.data);
+        //Cookies.set('accessToken', accessToken, {expires:180});
+        setAccessToken(accessToken); // GlobalContext에 accessToken 저장
         navigate('/mainhome'); // 로그인 성공 후 페이지 이동
       }
 
@@ -74,12 +78,12 @@ function Login() {
 			<form className={styles.login} onSubmit={handleSubmit}>
 				<fieldset>
           <h1>로그인</h1>
-            <label for="id">전화번호 입력 후 인증번호 전송 버튼을 눌러주세요</label>
+            <label for="id">이메일을 입력해주세요</label>
             <div className={styles.phone}>
               <input type="text" id= "id"  className={styles.id} value={email} onChange={handleEmailChange} placeholder='이메일' />
-              <button>인증번호 전송</button> 
+              {/* <button>인증번호 전송</button>  */}
             </div>
-						<label for="password">인증번호 입력 후 인증하기 버튼을 눌러주세요</label>
+						<label for="password">비밀번호를 입력해주세요</label>
             <input type="password" id="password" value = {password} className={styles.password} onChange={handlePasswordChange} placeholder='비밀번호'/>
           <div>
 					  <button className={styles.loginButton} type="submit">로그인하기</button>

@@ -5,14 +5,19 @@ import Humidity from './components/Humidity';
 import SoilStatus from './components/SoilStatus';
 import PlantStatus from './components/PlantStatus';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { GlobalContext } from '../../global_provider';
+import { callHeartBeat, callHeartBeat2, callStopHeartBeat } from '../functions/service_call';
 
 const Farmsystem = () => {
+
+  const { temperature, humidity, ecOfSoil, phOfSoil, moistureOfSoil } = useContext(GlobalContext);
+  const { setTemperature, setHumidity, setPhOfSoil, setEcOfSoil, setMoistureOfSoil } = useContext(GlobalContext);
+  const {accessToken} = useContext(GlobalContext);
   const { id } = useParams(); // URL에서 농장 ID 가져오기
   const [farmData, setFarmData] = useState(null); // 농장 데이터 상태
-  const accessToken = Cookies.get('accessToken');
 
   // 농장 데이터를 API로부터 가져오는 함수
   useEffect(() => {
@@ -30,12 +35,28 @@ const Farmsystem = () => {
           }
         );
         setFarmData(response.data); // 농장 데이터 설정
+        
+        const updateFunctions = {
+          setTemperature,
+          setHumidity,
+          setPhOfSoil,
+          setEcOfSoil,
+          setMoistureOfSoil
+        };
+
+        callHeartBeat(id); // 농장 데이터를 주기적으로 가져오는 함수 호출
+        callHeartBeat2(id, updateFunctions); // 농장 데이터를 주기적으로 가져오는 함수 호출
+        
+
       } catch (error) {
         console.error('Error fetching farm data:', error);
       }
     };
 
     fetchFarmData();
+    return () => {
+      callStopHeartBeat();
+    };
   }, [id, accessToken]);
 
   if (!farmData) {
@@ -55,10 +76,10 @@ const Farmsystem = () => {
 
         <div className="w-full flex flex-col items-end space-y-8 pr-10">
           <div className="w-full max-w-[75%]">
-            <Temperature value={farmData.temperature} /> {/* 온도 데이터 */}
+            <Temperature value={temperature} /> {/* 온도 데이터 */}
           </div>
           <div className="w-full max-w-[75%]">
-            <Humidity value={farmData.humidity} /> {/* 습도 데이터 */}
+            <Humidity value={humidity} /> {/* 습도 데이터 */}
           </div>
           <div className="w-full max-w-[75%]">
             <SoilStatus value={farmData.soilMoisture} /> {/* 토양 상태 */}

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Community from "./pages/Community";
 import Detail from "./pages/Detail";
 import data from "../data";
@@ -14,6 +14,9 @@ import MyDetail from './pages/MyDetail';
 import Chatting from './pages/Chatting';
 import Mainhome from './pages/Mainhome';
 import React from 'react';
+import {GlobalProvider} from '../global_provider'; // GlobalProvider 가져오기
+import { useNavigate } from "react-router-dom";
+
 
 function App() {
     const [products, setProducts] = useState(data);
@@ -56,8 +59,9 @@ function App() {
     }
 
     return (
-        <div>
+        <GlobalProvider>
             <Routes>
+                <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/home/:id" element={<Home />} />
@@ -71,16 +75,8 @@ function App() {
                 <Route path="/farmsystem/:id" element={<Farmsystem />} />
                 <Route path="/mainhome" element={<Mainhome onCreate={onFarm} />} />
             </Routes>
-        </div>
+        </GlobalProvider>
     );
 }
 
-function Root() {
-    return (
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    );
-}
-
-export default Root;
+export default App;

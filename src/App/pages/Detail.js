@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Nav from './components/CommunityNav';
 import DetailCss from './css/Detail.module.less';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Cookies from 'js-cookie';
 import CommentSection from './components/Comment';
 import axios from "axios";
+import { GlobalContext } from "../../global_provider";
 
 function Detail(props) {
   let { id } = useParams();
@@ -13,6 +14,7 @@ function Detail(props) {
   const [postAuthorId, setPostAuthorId] = useState('');
   const [currentUserId, setCurrentUserId] = useState(''); // 로그인한 사용자 ID 저장
   const [showDropdown, setShowDropdown] = useState(false);
+  const { accessToken } = useContext(GlobalContext);
 
   let navigate = useNavigate();
 
@@ -21,7 +23,7 @@ function Detail(props) {
     try {
       const response = await axios.get(`http://52.63.12.126/api/v1/posts/${id}`, {
         headers: {
-          'Authorization': `Bearer ${Cookies.get('accessToken')}`,
+          'Authorization': `Bearer ${accessToken}`,
           'accept': 'application/hal+json'
         }
       });
@@ -42,7 +44,7 @@ function Detail(props) {
     try {
       const response = await axios.get('http://52.63.12.126/api/v1/user/my', {
         headers: {
-          'Authorization': `Bearer ${Cookies.get('accessToken')}`,
+          'Authorization': `Bearer ${accessToken}`,
           'accept': 'application/hal+json'
         }
       });
@@ -76,7 +78,6 @@ function Detail(props) {
 
   // 게시글 삭제 요청
   const handleDeleteClick = async () => {
-    const accessToken = Cookies.get('accessToken');
 
     try {
       await axios.delete(`http://52.63.12.126/api/v1/posts/${id}`, {
@@ -94,7 +95,6 @@ function Detail(props) {
 
   // 게시글 판매 요청 (로그인한 사용자 ID를 전달)
   const handleSellClick = async () => {
-    const accessToken = Cookies.get('accessToken');
 
     try {
       await axios.patch(`http://52.63.12.126/api/v1/posts/${id}/sell?buyerId=${currentUserId}`, null, {

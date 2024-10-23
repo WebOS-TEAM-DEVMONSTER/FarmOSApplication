@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import navStyle from '../css/Nav.module.less';
+import { GlobalContext } from '../../../global_provider';
 
 function CommunityNav() {
   const [farms, setFarms] = useState([]); // 농장 목록 저장
-  const accessToken = Cookies.get('accessToken');
-
+  const { accessToken } = useContext(GlobalContext); // GlobalContext에서 accessToken 가져오기
   // 농장 목록을 API로부터 불러오기
   useEffect(() => {
     const fetchFarms = async () => {

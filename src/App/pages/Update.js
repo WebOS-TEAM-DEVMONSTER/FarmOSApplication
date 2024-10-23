@@ -1,11 +1,13 @@
 import Nav from "./components/CommunityNav";
 import updateCss from "./css/Update.module.less";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { GlobalContext } from "../../global_provider";
 
 function Update(props) { 
+  const { accessToken } = useContext(GlobalContext); // GlobalContext에서 accessToken 가져오기
   const { id } = useParams(); // 게시글 ID 가져오기
   const [title, setTitle] = useState(""); // 제목 상태
   const [price, setPrice] = useState(""); // 가격 상태
@@ -16,7 +18,6 @@ function Update(props) {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const accessToken = Cookies.get('accessToken'); // Access Token 가져오기
         const response = await axios.get(
           `http://52.63.12.126/api/v1/posts/${id}`, // 게시글 데이터 불러오기
           {
@@ -43,7 +44,6 @@ function Update(props) {
   const handleUpdate = async (event) => {
     event.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
 
-    const accessToken = Cookies.get('accessToken'); // Access Token 가져오기
 
     try {
       // API 요청: 게시글 수정
