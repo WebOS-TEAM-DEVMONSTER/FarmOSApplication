@@ -38,7 +38,7 @@ function Login() {
         const { accessToken } = response.data; // 서버로부터 accessToken 받기
         Cookies.set('accessToken', accessToken, {expires:180});
   
-        navigate('/create'); // 로그인 성공 후 페이지 이동
+        navigate('/mainhome'); // 로그인 성공 후 페이지 이동
       }
 
 

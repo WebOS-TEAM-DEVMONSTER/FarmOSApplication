@@ -51,13 +51,16 @@ function App() {
         }
         setProducts(newProducts);
     }
+    const onFarm = (_id)=> {
+        navigate(`/home/${_id}`);
+    }
 
     return (
         <div>
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/home/:id" element={<Home />} />
                 <Route path="/community" element={<Community products={products} />} />
                 <Route path="/detail/:id" element={<Detail products={products} />} />
                 <Route path="/create" element={<Create onCreate={handleCreate} />} />
@@ -65,8 +68,8 @@ function App() {
                 <Route path="/userDetail/:id"  element={<UserProfile products={products} onUpScore={onUpScore}/>} />
                 <Route path="/myDetail" element={<MyDetail products = {products}/>} />
                 <Route path="/chatting" element={<Chatting />} />
-                <Route path="/farmsystem" element={<Farmsystem />} />
-                <Route path="/mainhome" element={<Mainhome/>} />
+                <Route path="/farmsystem/:id" element={<Farmsystem />} />
+                <Route path="/mainhome" element={<Mainhome onCreate={onFarm} />} />
             </Routes>
         </div>
     );
