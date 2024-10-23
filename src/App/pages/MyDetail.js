@@ -6,6 +6,8 @@ import UserProfileCss from './css/UserProfile.module.less';
 
 
 function MyDetail(props) {
+
+  
   let navigate = useNavigate();
   const myProducts = props.products.filter((product) => product.nickname === "kimgguggury")
   return(
