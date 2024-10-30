@@ -4,12 +4,11 @@ import Card from './components/Card';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 function Community() {
   const [products, setProducts] = useState([]); // 서버에서 받아온 데이터를 저장하는 상태
   const [loading, setLoading] = useState(true); // 로딩 상태 관리
-  const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
+  const accessToken = window.localStorage.getItem('accessToken'); // localStorage에서 accessToken 가져오기
   let navigate = useNavigate();
 
   // 서버에서 데이터 불러오기
@@ -52,8 +51,8 @@ function Community() {
         { status: newStatus },
         {
           headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'accept': 'application/hal+json',
+            Authorization: `Bearer ${accessToken}`,
+            accept: 'application/hal+json',
           }
         }
       );
@@ -86,29 +85,25 @@ function Community() {
       </form>
       <section>
         <div className={communityCss.wrapper}>
-          {
-            products.length > 0 ? (
-              products.map((product, index) => {
-                return (
-                  <Card
-                    key={product.id}
-                    product={product}
-                    index={index}
-                    userDetailPage={() => navigate(`/userDetail/${product.user.id}`)}
-                    handleClick={() => {
-                      // 상품 상세 페이지로 이동
-                      navigate(`/detail/${product.id}`);
+          {products.length > 0 ? (
+            products.map((product, index) => (
+              <Card
+                key={product.id}
+                product={product}
+                index={index}
+                userDetailPage={() => navigate(`/userDetail/${product.user.id}`)}
+                handleClick={() => {
+                  // 상품 상세 페이지로 이동
+                  navigate(`/detail/${product.id}`);
 
-                      // 상태를 ON_SALE -> NOT_SALE로 변경하는 서버 요청
-                      updateProductStatus(product.id, 'NOT_SALE');
-                    }}
-                  />
-                );
-              })
-            ) : (
-              <p>No posts available.</p> // 게시글이 없을 때 표시
-            )
-          }
+                  // 상태를 ON_SALE -> NOT_SALE로 변경하는 서버 요청
+                  updateProductStatus(product.id, 'NOT_SALE');
+                }}
+              />
+            ))
+          ) : (
+            <p>No posts available.</p> // 게시글이 없을 때 표시
+          )}
         </div>
       </section>
     </div>

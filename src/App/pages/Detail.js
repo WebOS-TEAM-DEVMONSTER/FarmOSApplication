@@ -2,7 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import Nav from './components/CommunityNav';
 import DetailCss from './css/Detail.module.less';
 import { useState, useEffect } from "react";
-import Cookies from 'js-cookie';
 import CommentSection from './components/Comment';
 import axios from "axios";
 
@@ -16,12 +15,14 @@ function Detail(props) {
 
   let navigate = useNavigate();
 
+  const accessToken = window.localStorage.getItem('accessToken'); // localStorage에서 토큰 가져오기
+
   // 게시글 데이터를 불러오는 함수
   const fetchPostData = async () => {
     try {
       const response = await axios.get(`http://52.63.12.126/api/v1/posts/${id}`, {
         headers: {
-          'Authorization': `Bearer ${Cookies.get('accessToken')}`,
+          'Authorization': `Bearer ${accessToken}`,
           'accept': 'application/hal+json'
         }
       });
@@ -42,7 +43,7 @@ function Detail(props) {
     try {
       const response = await axios.get('http://52.63.12.126/api/v1/user/my', {
         headers: {
-          'Authorization': `Bearer ${Cookies.get('accessToken')}`,
+          'Authorization': `Bearer ${accessToken}`,
           'accept': 'application/hal+json'
         }
       });
@@ -76,8 +77,6 @@ function Detail(props) {
 
   // 게시글 삭제 요청
   const handleDeleteClick = async () => {
-    const accessToken = Cookies.get('accessToken');
-
     try {
       await axios.delete(`http://52.63.12.126/api/v1/posts/${id}`, {
         headers: {
@@ -94,8 +93,6 @@ function Detail(props) {
 
   // 게시글 판매 요청 (로그인한 사용자 ID를 전달)
   const handleSellClick = async () => {
-    const accessToken = Cookies.get('accessToken');
-
     try {
       await axios.patch(`http://52.63.12.126/api/v1/posts/${id}/sell?buyerId=${currentUserId}`, null, {
         headers: {

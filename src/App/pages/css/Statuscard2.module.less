@@ -1,0 +1,71 @@
+/* StatusCard2.module.css */
+
+.card {
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    background-color: #f3f5e9;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .card {
+      height: 50vh;
+    }
+  }
+  
+  /* StatusCard2.module.less */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto; /* 높이를 내용에 맞게 설정 */
+    max-height: 50vh; /* 최대 높이 제한 */
+  }
+  
+  
+  .left-section, .center-section, .right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 2rem;
+  }
+  
+  .left-section svg, .right-section svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .left-section .button-text, .right-section .title {
+    color: #1a1c16;
+    font-size: 1.875rem; /* 3xl */
+    margin: 1rem 0;
+  }
+  
+  .center-section .state {
+    color: #1a1c16;
+    font-size: 2.5rem; /* 4xl */
+    margin-bottom: 1rem;
+  }
+  
+  .center-section .number {
+    color: #4a5930;
+    font-size: 6rem; /* 8xl */
+    font-weight: bold;
+  }
+  
+  .warning {
+    display: flex;
+    align-items: start;
+    font-size: 1.5rem; /* 2xl */
+  }
+  
+  .warning input {
+    margin-right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
