@@ -3,7 +3,6 @@ import updateCss from "./css/Update.module.less";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 function Update(props) { 
   const { id } = useParams(); // 게시글 ID 가져오기
@@ -12,17 +11,18 @@ function Update(props) {
   const [content, setContent] = useState(""); // 내용 상태
   const navigate = useNavigate(); // 네비게이션 훅
 
+  const accessToken = window.localStorage.getItem('accessToken'); // localStorage에서 Access Token 가져오기
+
   // 수정 페이지가 로드될 때 기존 데이터를 가져오는 함수
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const accessToken = Cookies.get('accessToken'); // Access Token 가져오기
         const response = await axios.get(
           `http://52.63.12.126/api/v1/posts/${id}`, // 게시글 데이터 불러오기
           {
             headers: {
-              'Authorization': `Bearer ${accessToken}`,
-              'accept': 'application/hal+json',
+              Authorization: `Bearer ${accessToken}`,
+              accept: 'application/hal+json',
             },
           }
         );
@@ -37,13 +37,11 @@ function Update(props) {
     };
 
     fetchPostData();
-  }, [id]);
+  }, [id, accessToken]);
 
   // 수정 요청 함수
   const handleUpdate = async (event) => {
     event.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
-
-    const accessToken = Cookies.get('accessToken'); // Access Token 가져오기
 
     try {
       // API 요청: 게시글 수정
@@ -58,9 +56,9 @@ function Update(props) {
         },
         {
           headers: {
-            'Authorization': `Bearer ${accessToken}`, // Access Token을 헤더에 포함
+            Authorization: `Bearer ${accessToken}`, // Access Token을 헤더에 포함
             'Content-Type': 'application/json',
-            'accept': 'application/hal+json',
+            accept: 'application/hal+json',
           },
         }
       );

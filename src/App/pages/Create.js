@@ -1,16 +1,13 @@
 import Nav from "./components/CommunityNav";
-import "react";
 import createCss from "./css/Create.module.less";
-import "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom"; // useNavigate 가져오기
 
 function Create(props) {
   const [farms, setFarms] = useState([]);
   const [selectedFarmId, setSelectedFarmId] = useState("");
-  const accessToken = Cookies.get('accessToken'); // 쿠키에서 accessToken 가져오기
+  const accessToken = window.localStorage.getItem('accessToken'); // localStorage에서 accessToken 가져오기
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 사용
 
   // 농장 목록을 서버에서 가져오는 함수
@@ -20,7 +17,7 @@ function Create(props) {
         console.log('Access Token:', accessToken); // 토큰이 제대로 있는지 확인
         const response = await axios.get("http://52.63.12.126/api/v1/farms/my", {
           headers: {
-            "Authorization": `Bearer ${accessToken}`, // Authorization 헤더 추가
+            Authorization: `Bearer ${accessToken}`, // Authorization 헤더 추가
           },
         });
         console.log('Farms data:', response.data); // 응답 데이터 로그로 확인
@@ -32,7 +29,7 @@ function Create(props) {
         }
       }
     };
-  
+
     fetchFarms();
   }, [accessToken]);
 
@@ -40,11 +37,12 @@ function Create(props) {
     setSelectedFarmId(e.target.value);
   };
 
-  return(
+  return (
     <>
       <Nav />
-      <form style={{display :"flex", justifyContent : "center" } }
-          onSubmit= { async (event) =>  {
+      <form
+        style={{ display: "flex", justifyContent: "center" }}
+        onSubmit={async (event) => {
           event.preventDefault();
           const title = event.target.title.value;
           const price = event.target.price.value;
@@ -57,16 +55,16 @@ function Create(props) {
             content: content,
             farmId: farmId,
           };
-          
+
           let header = {
-            'accept': 'application/hal+json',
+            accept: 'application/hal+json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+accessToken // 쿠키에서 찾기
+            Authorization: `Bearer ${accessToken}`, // localStorage에서 가져오기
           };
 
           try {
             const response = await axios.post('http://52.63.12.126/api/v1/posts', postData, {
-              headers: header
+              headers: header,
             });
             console.log('Post created successfully:', response.data);
             navigate('/community'); // 게시글이 성공적으로 생성되면 /community로 이동
@@ -77,10 +75,10 @@ function Create(props) {
       >
         <div className={createCss.container}>
           <h1>게시글 작성하기</h1>
-          <input className={createCss.title} name="title" placeholder="제목"/>
-          <input className={createCss.price} name="price" placeholder="가격"/>
-          <textarea className={createCss.content} name="content" placeholder="내용"/>
-          
+          <input className={createCss.title} name="title" placeholder="제목" />
+          <input className={createCss.price} name="price" placeholder="가격" />
+          <textarea className={createCss.content} name="content" placeholder="내용" />
+
           {/* 서버에서 받아온 농장 목록을 이용해 드롭다운 생성 */}
           <div>
             <label htmlFor="farm-select">농장을 선택하세요:</label>
@@ -105,7 +103,7 @@ function Create(props) {
         </div>
       </form>
     </>
-  )
+  );
 }
 
 export default Create;

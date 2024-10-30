@@ -11,4 +11,10 @@ const PlantStatus = () => {
   );
 };
 
+
+//식물 상태
+//0~37까지 텍스트로 변환
+//아웃풋 : 질병 명(38개 중 하나)
+//
+
 export default PlantStatus;

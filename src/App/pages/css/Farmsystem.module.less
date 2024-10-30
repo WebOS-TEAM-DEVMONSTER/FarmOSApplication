@@ -1,0 +1,48 @@
+/* Farmsystem.module.less */
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* 화면 전체 높이 설정 */
+    overflow: hidden; /* 부모에서 스크롤을 막음 */
+  }
+  
+  .section {
+    flex-grow: 1;
+    height: 100%; /* 전체 높이 사용 */
+    padding: 2.5rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+    scroll-behavior: smooth; /* 부드러운 스크롤 효과 */
+  }
+  
+  .title {
+    width: 100%;
+    text-align: center;
+    color: #1a1c16;
+    font-size: 4.375rem; /* 7xl */
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+  }
+  
+  .data-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem; /* 카드 사이 간격 */
+    padding-right: 2.5rem;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 75%;
+    background-color: #f3f5e9;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  }
+  

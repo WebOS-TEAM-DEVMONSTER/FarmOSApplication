@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import Nav from './components/CommunityNav';
+import styles from './css/Home.module.less'; // CSS 모듈 import
 
 function Home() {
   const { id } = useParams(); // URL에서 농장 ID 가져오기
   const [farm, setFarm] = useState(null);
   const [username, setUsername] = useState('');
-  const accessToken = Cookies.get('accessToken');
+
+  // localStorage에서 accessToken 가져오기
+  const accessToken = window.localStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -48,16 +50,14 @@ function Home() {
   if (!farm) return <div>Loading farm details...</div>;
 
   return (
-    <div className="flex w-screen h-screen bg-white">
+    <div className={styles.container}>
       <Nav />
-      <section className="flex-grow h-full p-10 bg-white flex flex-col items-end">
-        <h1 className="w-full text-center text-[#1a1c16] text-7xl font-bold mb-10">
-          {farm.farmName} 스마트팜
-        </h1>
-        <div className="w-full max-w-[75%]">
+      <section className={styles.section}>
+        <h1 className={styles.title}>{farm.farmName} 스마트팜</h1>
+        <div className={styles.text}>
           {farm.farmCategory} 스마트팜에 입장하셨습니다.
         </div>
-        <div className="w-full max-w-[75%]">
+        <div className={styles.text}>
           OWNER<br />{username}님.
         </div>
       </section>
