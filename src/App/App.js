@@ -14,6 +14,7 @@ import MyDetail from './pages/MyDetail';
 import Chatting from './pages/Chatting';
 import Mainhome from './pages/Mainhome';
 import React from 'react';
+import { GlobalProvider } from '../global_provider';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -85,22 +86,23 @@ function App() {
 
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/home/:id" element={<Home />} />
-        <Route path="/community" element={<Community products={products} />} />
-        <Route path="/detail/:id" element={<Detail products={products} />} />
-        <Route path="/create" element={<Create onCreate={handleCreate} />} />
-        <Route path="/update/:id" element={<Update onUpdate={onUpdate} products={products} />} />
-        <Route path="/userDetail/:id" element={<UserProfile products={products} onUpScore={onUpScore} />} />
-        <Route path="/myDetail" element={<MyDetail products={products} />} />
-        <Route path="/chatting" element={<Chatting />} />
-        <Route path="/farmsystem/:id" element={<Farmsystem />} />
-        <Route path="/mainhome" element={<Mainhome onCreate={onFarm} />} />
-        <Route path="*" element={<h1>404 - 페이지를 찾을 수 없습니다.</h1>} />
-      </Routes>
+      <GlobalProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home/:id" element={<Home />} />
+          <Route path="/community" element={<Community products={products} />} />
+          <Route path="/detail/:id" element={<Detail products={products} />} />
+          <Route path="/create" element={<Create onCreate={handleCreate} />} />
+          <Route path="/update/:id" element={<Update onUpdate={onUpdate} products={products} />} />
+          <Route path="/userDetail/:id" element={<UserProfile products={products} onUpScore={onUpScore} />} />
+          <Route path="/myDetail" element={<MyDetail products={products} />} />
+          <Route path="/chatting" element={<Chatting />} />
+          <Route path="/farmsystem/:id" element={<Farmsystem />} />
+          <Route path="/mainhome" element={<Mainhome onCreate={onFarm} />} />
+          <Route path="*" element={<h1>404 - 페이지를 찾을 수 없습니다.</h1>} />
+        </Routes>
+      </GlobalProvider>
     </div>
   );
 }

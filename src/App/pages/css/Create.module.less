@@ -1,49 +1,70 @@
+/* 초기 설정 */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
+/* Scroller 영역 */
 .container {
-  width: 2000px;
+  width: 100%;
+  max-width: 2000px;
   height: 100vh;
-  margin:0 0 0 500px;
+  margin: 0 0 0 500px;
+  overflow-y: auto; /* 세로 스크롤 가능 */
+  padding-right: 1rem; /* 스크롤바 여백 */
 }
+
+/* 제목 스타일 */
 .container > h1 {
   margin: 100px 0 0 0;
-  font-size: 100px;
+  font-size: 3rem; /* 반응형을 위해 폰트 크기 조정 */
 }
+
+/* 타이틀 스타일 */
 .title {
-  width: 2000px;
+  width: 100%;
+  max-width: 2000px;
   height: 200px;
-  margin: 100px 0 0 0;
-  padding: 0 0 0 10px;
-  font-size:100px;
+  margin: 50px 0 0 0; /* 여백 조정 */
+  padding-left: 10px;
+  font-size: 3rem;
 }
+
+/* 가격 스타일 */
 .price {
-  margin: 100px 0 0 0;
-  padding: 0 0 0 10px;
-  font-size:100px;
-  width:2000px;
+  width: 100%;
+  max-width: 2000px;
   height: 200px;
+  margin: 50px 0 0 0; /* 여백 조정 */
+  padding-left: 10px;
+  font-size: 3rem;
 }
+
+/* 콘텐츠 스타일 */
 .content {
-  font-size:50px;
-  margin: 100px 0 0 0;
+  font-size: 2rem;
+  margin: 50px 0 0 0; /* 여백 조정 */
   padding: 10px;
-  width:2000px;
+  width: 100%;
+  max-width: 2000px;
   height: 700px;
-  background-color:#E2E3D8;
+  background-color: #E2E3D8;
 }
-section{
-  display:flex;
-  justify-content:center;
+
+/* 버튼 영역 스타일 */
+section {
+  display: flex;
+  justify-content: center;
 }
+
+/* 버튼 스타일 */
 section > button {
-  margin: 50px 0 50px 0 ;
+  margin: 50px 0;
   width: 800px;
-  height:100px;
+  height: 100px;
   border-radius: 50px;
-  font-size: 60px;
-  background-color:#4A662C;
-  color:white;
+  font-size: 2rem;
+  background-color: #4A662C;
+  color: white;
 }

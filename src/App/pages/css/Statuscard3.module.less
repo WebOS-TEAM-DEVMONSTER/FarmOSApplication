@@ -1,51 +1,45 @@
-/* SoilStatus.module.less */
-
 .card {
-    width: 100%;
-    max-width: 60vw;
-    height: auto; /* 고정 높이 제거 */
-    max-height: 50vh; /* 최대 높이 제한 */
-    background-color: #f3f5e9;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-  
-  .content {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  @media (min-width: 768px) {
-    .card {
-      height: 50vh;
-    }
-  }
-  
-  .title {
-    text-align: center;
-    color: #1a1c16;
-    font-size: 2.5rem; /* 4xl */
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-  }
-  
+  width: 100%;
+  max-width: 60vw;
+  height: auto;
+  background-color: #f3f5e9;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin: 1rem;
+}
 
-  
-  .info {
-    color: #1a1c16;
-    font-size: 1.25rem; /* xl */
-    line-height: 1.75rem;
+@media (min-width: 768px) {
+  .card {
+    height: 50vh;
   }
-  
-  .warning {
-    display: flex;
-    align-items: start;
-    font-size: 1.25rem; /* xl */
-  }
-  
-  .warning input {
-    margin-right: 0.5rem;
-  }
-  
+}
+
+.title {
+  text-align: center;
+  color: #1a1c16;
+  font-size: 2.5rem; /* 4xl */
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+  color: #1a1c16;
+  font-size: 1.25rem; /* xl */
+  line-height: 1.75rem;
+}
+
+.warning {
+  display: flex;
+  align-items: start;
+  font-size: 1.25rem; /* xl */
+}
+
+.warning input {
+  margin-right: 0.5rem;
+}

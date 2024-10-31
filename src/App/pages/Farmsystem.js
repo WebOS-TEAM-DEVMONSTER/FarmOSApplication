@@ -1,21 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Scroller } from '@enact/moonstone/Scroller';
 import Nav from './components/CommunityNav';
 import Temperature from './components/Temperature';
 import Humidity from './components/Humidity';
 import SoilStatus from './components/SoilStatus';
 import PlantStatus from './components/PlantStatus';
-import styles from './css/Farmsystem.module.less'; // CSS 모듈 import
+import styles from './css/Farmsystem.module.less';
+import { GlobalContext } from '../../global_provider';
+import {callHeartBeat, callHeartBeat2, callStopHeartBeat} from '../functions/service_call'
 
 const Farmsystem = () => {
-  const { id } = useParams(); // URL에서 농장 ID 가져오기
-  const [farmData, setFarmData] = useState(null); // 농장 데이터 상태
-  const accessToken = window.localStorage.getItem('accessToken'); // localStorage에서 accessToken 가져오기
+  const { id } = useParams();
+  const [farmData, setFarmData] = useState(null);
+  const accessToken = window.localStorage.getItem('accessToken');
+  const {temperature, humidity, ecOfSoil, phOfSoil, moistureOfSoil, evaluation} = useContext(GlobalContext)
+  
+  const {setTemperature, setHumidity, setEcOfSoil, setPhOfSoil, setMoistureOfSoil, setEvaluation} = useContext(GlobalContext)
 
-  // 농장 데이터를 API로부터 가져오는 함수
+  const updateFunctions = {
+    setTemperature,
+    setHumidity,
+    setPhOfSoil,
+    setEcOfSoil,
+    setMoistureOfSoil,
+    setEvaluation
+  }
+
   useEffect(() => {
     const fetchFarmData = async () => {
+
       if (!accessToken) return;
 
       try {
@@ -28,46 +43,52 @@ const Farmsystem = () => {
             },
           }
         );
-        setFarmData(response.data); // 농장 데이터 설정
+        setFarmData(response.data);
       } catch (error) {
         console.error('Error fetching farm data:', error);
       }
     };
 
     fetchFarmData();
+
+      //함수호출
+
   }, [id, accessToken]);
 
+  callHeartBeat(id);
+  callHeartBeat2(id, updateFunctions);
+
   if (!farmData) {
-    return <div>Loading farm system data...</div>; // 데이터 로딩 시 표시
+    return <div>Loading farm system data...</div>;
   }
 
   return (
-    <>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.navWrapper}>
         <Nav />
       </div>
 
-      <section className={styles.section}>
+      <Scroller className={styles.section} verticalScrollbar="visible">
         <h1 className={styles.title}>
           {farmData.farmName} 스마트팜 상태 확인
         </h1>
 
         <div className={styles['data-container']}>
           <div className={styles.card}>
-            <Temperature value={farmData.temperature} /> {/* 온도 데이터 */}
+            <Temperature value={temperature} />
           </div>
           <div className={styles.card}>
-            <Humidity value={farmData.humidity} /> {/* 습도 데이터 */}
+            <Humidity value={humidity} />
           </div>
           <div className={styles.card}>
-            <SoilStatus value={farmData.soilMoisture} /> {/* 토양 상태 */}
+            <SoilStatus value={moistureOfSoil} />
           </div>
           <div className={styles.card}>
-            <PlantStatus value={farmData.plantHealth} /> {/* 식물 상태 */}
+            <PlantStatus value={evaluation} />
           </div>
         </div>
-      </section>
-    </>
+      </Scroller>
+    </div>
   );
 };
 
