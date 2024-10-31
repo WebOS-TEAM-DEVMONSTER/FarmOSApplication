@@ -1,7 +1,11 @@
-import React from 'react';
-import styles from '../css/Statuscard3.module.less'; // CSS 모듈 import
+import React, { useContext } from 'react';
 
-const StatusCard3 = ({ hum, ph, aa, el, warning }) => {
+import styles from '../css/Statuscard3.module.less'; // CSS 모듈 import
+import { GlobalContext } from '../../../global_provider'; // GlobalContext 가져오기
+
+const StatusCard3 = ({  warning }) => {
+  const {ecOfSoil,setEcOfSoil, phOfSoil,setPhOfSoil,moistureOfSoil,setMoistureOfSoil, } = useContext(GlobalContext); // 전역 변수 사용 예시
+
   return (
     <div className={styles.card}>
       {/* 제목 */}
@@ -12,10 +16,9 @@ const StatusCard3 = ({ hum, ph, aa, el, warning }) => {
         {/* 왼쪽 상태 정보 */}
         <div className={styles.info}>
           <ul>
-            <li>토양 수분 : {hum}%</li>
-            <li>PH농도 : {ph}</li>
-            <li>유기물 함량: {aa}%</li>
-            <li>전기 전도도 : {el}%</li>
+            <li>토양 수분 : {moistureOfSoil}%</li>
+            <li>PH농도 : {phOfSoil}</li>
+            <li>전기 전도도 : {ecOfSoil}%</li>
           </ul>
         </div>
 
