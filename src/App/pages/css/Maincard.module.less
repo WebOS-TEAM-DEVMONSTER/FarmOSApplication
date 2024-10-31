@@ -1,0 +1,24 @@
+@color-bg: #f3f7e1;
+@color-text: #1a1c16;
+@font-roboto: 'Roboto', sans-serif;
+
+.maincard {
+  width: 883px;
+  height: 154px;
+  border-radius: 16px; // Tailwind rounded-xl
+  background-color: @color-bg;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // 대체로 Tailwind shadow를 재현하는 방법
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+  .farm-name {
+    color: @color-text;
+    font-size: 45px;
+    font-weight: 500; // Tailwind font-medium
+    font-family: @font-roboto;
+    line-height: normal;
+    letter-spacing: -0.02em; // Tailwind tracking-tight 대체
+  }
+}

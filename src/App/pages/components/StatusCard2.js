@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../css/Statuscard2.module.less'; // CSS 모듈 import
 
-const StatusCard2 = ({ buttontext, nowstate, nownum, title, warning }) => {
+const StatusCard2 = ({ buttontext,makestate, makenum, nowstate, nownum, title, warning }) => {
   return (
     <div className={styles.card}>
       {/* 가로로 중앙 정렬 */}
@@ -34,6 +34,8 @@ const StatusCard2 = ({ buttontext, nowstate, nownum, title, warning }) => {
         <div className={styles['center-section']}>
           <div className={styles.state}>{nowstate}</div> {/* 현재 상태 */}
           <div className={styles.number}>{nownum}</div> {/* 숫자 표시 */}
+          <div className={styles.state}>{makestate}</div> {/* 바꾸는 상태 */}
+          <div className={styles.number}>{makenum}</div> {/* 바꾸는 숫자 표시 */}
         </div>
 
         {/* 오른쪽 영역 */}
