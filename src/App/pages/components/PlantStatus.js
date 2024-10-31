@@ -1,7 +1,7 @@
 import React from 'react';
 import StatusCard from './StatusCard';
 
-const PlantStatus = () => {
+const PlantStatus = (url) => {
   return (
     <StatusCard
       title="식물 상태"

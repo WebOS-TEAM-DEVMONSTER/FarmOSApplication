@@ -1,8 +1,10 @@
 import React from 'react';
 import StatusCard2 from './StatusCard2';
+import StatusCardTemp from './StatusCardTemp';
 
-const Temperature = (temp, goalTemp) => {
+const Temperature = (temp) => {
 
+  var goalTemp = 25;
   var warn = "";
 
 
@@ -16,10 +18,9 @@ const Temperature = (temp, goalTemp) => {
 
 
   return (
-    <StatusCard2
+    <StatusCardTemp
       buttontext="온도 조절"
       nowstate="현재 온도"
-      nownum={temp}
       makestate = "바꿀 온도"
       makenum = {goalTemp}
       title="온도"

@@ -9,7 +9,8 @@ import SoilStatus from './components/SoilStatus';
 import PlantStatus from './components/PlantStatus';
 import styles from './css/Farmsystem.module.less';
 import { GlobalContext } from '../../global_provider';
-import {callHeartBeat, callHeartBeat2, callStopHeartBeat} from '../functions/service_call'
+import {useHeartBeat} from '../functions/use_heartbeat';
+
 
 const Farmsystem = () => {
   const { id } = useParams();
@@ -17,16 +18,7 @@ const Farmsystem = () => {
   const accessToken = window.localStorage.getItem('accessToken');
   const {temperature, humidity, ecOfSoil, phOfSoil, moistureOfSoil, evaluation} = useContext(GlobalContext)
   
-  const {setTemperature, setHumidity, setEcOfSoil, setPhOfSoil, setMoistureOfSoil, setEvaluation} = useContext(GlobalContext)
-
-  const updateFunctions = {
-    setTemperature,
-    setHumidity,
-    setPhOfSoil,
-    setEcOfSoil,
-    setMoistureOfSoil,
-    setEvaluation
-  }
+  useHeartBeat(id);
 
   useEffect(() => {
     const fetchFarmData = async () => {
@@ -54,9 +46,6 @@ const Farmsystem = () => {
       //함수호출
 
   }, [id, accessToken]);
-
-  callHeartBeat(id);
-  callHeartBeat2(id, updateFunctions);
 
   if (!farmData) {
     return <div>Loading farm system data...</div>;

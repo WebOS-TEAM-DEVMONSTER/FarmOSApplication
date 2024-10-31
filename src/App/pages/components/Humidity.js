@@ -1,5 +1,6 @@
 import React from 'react';
 import StatusCard2 from './StatusCard2';
+import StatusCardHumi from './StatusCardHumi';
 
 const Humidity = (hum) => {
 
@@ -14,10 +15,10 @@ const Humidity = (hum) => {
   }
 
   return (
-    <StatusCard2
+    <StatusCardHumi
       buttontext="습도 조절"
       nowstate="현재 습도"
-      nownum={hum}
+      //nownum={hum}
       title="습도"
       warning={warn}
     />
